@@ -1,53 +1,53 @@
-import type { Actions, GlobalState } from "./faces";
-import { defaultState } from "./index";
+import type { Actions, GlobalState } from './faces';
+import { defaultState } from './index';
 
 export default function reducer(
   state: GlobalState = defaultState,
-  action: Actions
+  action: Actions,
 ): GlobalState {
   switch (action.type) {
-    case "OPEN_MODAL":
+    case 'OPEN_MODAL':
       return {
         ...state,
-        activeModal: action.payload
+        activeModal: action.payload,
       };
 
-    case "CLOSE_MODAL":
+    case 'CLOSE_MODAL':
       return {
         ...state,
-        activeModal: false
+        activeModal: false,
       };
 
-    case "DISCONNECT":
+    case 'DISCONNECT':
       return {
         ...state,
         activeStrategy: false,
         activeAddress: undefined,
-        givenPermissions: []
+        givenPermissions: [],
       };
 
-    case "UPDATE_STRATEGY":
+    case 'UPDATE_STRATEGY':
       return {
         ...state,
-        activeStrategy: action.payload
+        activeStrategy: action.payload,
       };
 
-    case "UPDATE_CONFIG":
+    case 'UPDATE_CONFIG':
       return {
         ...state,
-        config: action.payload
+        config: action.payload,
       };
 
-    case "UPDATE_ADDRESS":
+    case 'UPDATE_ADDRESS':
       return {
         ...state,
-        activeAddress: action.payload
+        activeAddress: action.payload,
       };
 
-    case "UPDATE_PERMISSIONS":
+    case 'UPDATE_PERMISSIONS':
       return {
         ...state,
-        givenPermissions: action.payload
+        givenPermissions: action.payload,
       };
 
     default:

@@ -1,11 +1,12 @@
-import { DefaultTheme, withTheme } from "../theme";
-import type { Radius } from "./Provider";
-import { styled } from "@linaria/react";
+import { styled } from '@linaria/react';
+
+import { DefaultTheme, withTheme } from '../theme';
+import type { Radius } from './Provider';
 
 const radius: Record<Radius, number> = {
   default: 30,
   minimal: 6,
-  none: 0
+  none: 0,
 };
 
 export const Button = withTheme(styled.button<{ theme: DefaultTheme }>`
@@ -15,7 +16,7 @@ export const Button = withTheme(styled.button<{ theme: DefaultTheme }>`
   font-weight: 600;
   color: #fff;
   background-color: rgb(${(props) => props.theme.theme});
-  border-radius: ${(props) => radius[props.theme.themeConfig.radius] + "px"};
+  border-radius: ${(props) => radius[props.theme.themeConfig.radius] + 'px'};
   padding: 0.3rem 0.8rem;
   text-align: center;
   border: none;
@@ -32,13 +33,13 @@ export const Button = withTheme(styled.button<{ theme: DefaultTheme }>`
   &:hover:not(:active):not(:disabled) {
     transform: translate3d(0px, -1.4px, 0px);
     box-shadow: ${(props) =>
-      props.theme.displayTheme === "light"
+      props.theme.displayTheme === 'light'
         ? `0px 0px 2px rgba(${
-            props.theme.displayTheme === "light" ? "0, 0, 0" : "255, 255, 255"
+            props.theme.displayTheme === 'light' ? '0, 0, 0' : '255, 255, 255'
           }, .15), 0px 4px 7px rgba(${
-            props.theme.displayTheme === "light" ? "0, 0, 0" : "255, 255, 255"
+            props.theme.displayTheme === 'light' ? '0, 0, 0' : '255, 255, 255'
           }, .1)`
-        : "none"};
+        : 'none'};
   }
 
   &:disabled {

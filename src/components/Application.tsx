@@ -1,17 +1,18 @@
-import { DefaultTheme, withTheme } from "../theme";
-import type { MouseEventHandler } from "react";
-import type { Radius } from "./Provider";
-import { Paragraph } from "./Paragraph";
-import { styled } from "@linaria/react";
-import { Button } from "./Button";
-import { Title } from "./Title";
+import { styled } from '@linaria/react';
+import type { MouseEventHandler } from 'react';
+
+import { DefaultTheme, withTheme } from '../theme';
+import { Button } from './Button';
+import { Paragraph } from './Paragraph';
+import type { Radius } from './Provider';
+import { Title } from './Title';
 
 export function Application({
   logo,
   name,
   description,
   onClick,
-  theme
+  theme,
 }: Props) {
   return (
     <Wrapper>
@@ -52,7 +53,7 @@ export const Logo = styled.img`
 const radius: Record<Radius, number> = {
   default: 15,
   minimal: 6,
-  none: 0
+  none: 0,
 };
 
 export const AppIcon = withTheme(styled.div<{
@@ -63,13 +64,13 @@ export const AppIcon = withTheme(styled.div<{
   position: relative;
   width: 3.8rem;
   height: 3.8rem;
-  border-radius: ${(props) => radius[props.theme.themeConfig.radius] + "px"};
+  border-radius: ${(props) => radius[props.theme.themeConfig.radius] + 'px'};
   background-color: rgb(
     ${(props) => props.colorTheme || props.theme.primaryText}
   );
   flex-shrink: 0;
   -webkit-tap-highlight-color: transparent;
-  cursor: ${(props) => (props.clickable ? "pointer" : "default")};
+  cursor: ${(props) => (props.clickable ? 'pointer' : 'default')};
   transition: transform 0.125s ease;
 
   ${Logo} {
@@ -80,7 +81,7 @@ export const AppIcon = withTheme(styled.div<{
   }
 
   &:active {
-    transform: scale(${(props) => (props.clickable ? ".95" : "1")});
+    transform: scale(${(props) => (props.clickable ? '.95' : '1')});
   }
 `);
 

@@ -1,6 +1,7 @@
-import type { Tag } from "arweave/web/lib/transaction";
-import type { RGBObject } from "./components/Provider";
-import type { PermissionType } from "arconnect";
+import type { PermissionType } from 'arconnect';
+import type { Tag } from 'arweave/web/lib/transaction';
+
+import type { RGBObject } from '../components/Provider';
 
 /**
  * Compare two permission arrays
@@ -10,7 +11,7 @@ import type { PermissionType } from "arconnect";
  */
 export function comparePermissions(
   required: PermissionType[],
-  existing: PermissionType[]
+  existing: PermissionType[],
 ) {
   for (const permission of required) {
     if (!existing.includes(permission)) {
@@ -29,7 +30,7 @@ export function comparePermissions(
 export function formatAddress(address: string, count = 13) {
   return (
     address.substring(0, count) +
-    "..." +
+    '...' +
     address.substring(address.length - count, address.length)
   );
 }
@@ -53,14 +54,14 @@ export async function callWindowApi(fn: string, params: any[] = []) {
 
   // if it has not yet been injected
   return new Promise((resolve, reject) =>
-    window.addEventListener("arweaveWalletLoaded", async () => {
+    window.addEventListener('arweaveWalletLoaded', async () => {
       try {
         // @ts-expect-error
         resolve(await window.arweaveWallet[fn as any](...params));
       } catch (e) {
         reject(e);
       }
-    })
+    }),
   );
 }
 
@@ -73,8 +74,8 @@ export async function callWindowApi(fn: string, params: any[] = []) {
 export function decodeTags(tags: Tag[]) {
   return tags.map((tag) => {
     try {
-      const name = tag.get("name", { decode: true, string: true });
-      const value = tag.get("value", { decode: true, string: true });
+      const name = tag.get('name', { decode: true, string: true });
+      const value = tag.get('value', { decode: true, string: true });
       return { name, value };
     } catch {
       return tag;

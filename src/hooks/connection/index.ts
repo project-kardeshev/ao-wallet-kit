@@ -1,6 +1,6 @@
-import useDisconnect from "./disconnect";
-import useConnected from "./connected";
-import useConnect from "./connect";
+import useConnect from './connect';
+import useConnected from './connected';
+import useDisconnect from './disconnect';
 
 /**
  * Base connection hook
@@ -13,6 +13,6 @@ export default function useConnection() {
   return {
     connected,
     connect,
-    disconnect
+    disconnect,
   };
 }

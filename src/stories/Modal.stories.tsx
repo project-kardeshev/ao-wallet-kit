@@ -1,17 +1,18 @@
-import { ArweaveWalletKit } from "../components/Provider";
-import { Modal } from "../components/Modal/Modal";
-import { Head } from "../components/Modal/Head";
-import { Footer } from "../components/Modal/Footer";
-import { Title, TitleWithParagraph } from "../components/Title";
-import { Paragraph } from "../components/Paragraph";
-import { Button } from "../components/Button";
-import { Application } from "../components/Application";
-import useModal from "../hooks/modal";
-import { styled } from "@linaria/react";
+import { styled } from '@linaria/react';
+
+import { Application } from '../components/Application';
+import { Button } from '../components/Button';
+import { Footer } from '../components/Modal/Footer';
+import { Head } from '../components/Modal/Head';
+import { Modal } from '../components/Modal/Modal';
+import { Paragraph } from '../components/Paragraph';
+import { ArweaveWalletKit } from '../components/Provider';
+import { Title, TitleWithParagraph } from '../components/Title';
+import useModal from '../hooks/modal';
 
 export default {
-  name: "Modal",
-  component: Modal
+  name: 'Modal',
+  component: Modal,
 };
 
 export const Basic = () => {

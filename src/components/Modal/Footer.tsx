@@ -1,6 +1,7 @@
-import { DefaultTheme, withTheme } from "../../theme";
-import type { PropsWithChildren } from "react";
-import { styled } from "@linaria/react";
+import { styled } from '@linaria/react';
+import type { PropsWithChildren } from 'react';
+
+import { DefaultTheme, withTheme } from '../../theme';
 
 export function Footer({ children }: PropsWithChildren<{}>) {
   return <Wrapper>{children}</Wrapper>;

@@ -1,16 +1,17 @@
-import { DefaultTheme, Radius, withTheme } from "../../theme";
-import { version } from "../../../package.json";
-import type { PropsWithChildren } from "react";
-import useMobile from "../../hooks/mobile";
-import { styled } from "@linaria/react";
+import { styled } from '@linaria/react';
 import {
   AnimatePresence,
   ForwardRefComponent,
   HTMLMotionProps,
-  motion,
   MotionProps,
-  Variants
-} from "framer-motion";
+  Variants,
+  motion,
+} from 'framer-motion';
+import type { PropsWithChildren } from 'react';
+
+import { version } from '../../../package.json';
+import useMobile from '../../hooks/mobile';
+import { DefaultTheme, Radius, withTheme } from '../../theme';
 
 export function Modal({
   open,
@@ -18,7 +19,7 @@ export function Modal({
   children,
   className,
   variants,
-  noWatermark = false
+  noWatermark = false,
 }: PropsWithChildren<Props>) {
   const mobile = useMobile();
 
@@ -33,8 +34,8 @@ export function Modal({
             animate="shown"
             exit="hidden"
             transition={{
-              ease: "easeInOut",
-              duration: 0.23
+              ease: 'easeInOut',
+              duration: 0.23,
             }}
             key="bg"
             onClick={onClose}
@@ -44,7 +45,7 @@ export function Modal({
           <ModalAligner key="modal-aligner" className="modal-aligner">
             <ModalAnimator
               key="modal-animator"
-              className={"modal-animator " + (className ? " " + className : "")}
+              className={'modal-animator ' + (className ? ' ' + className : '')}
               variants={variants || modalAnimation(mobile)}
               initial="hidden"
               animate="shown"
@@ -61,7 +62,7 @@ export function Modal({
 
 const backgroundAnimation: Variants = {
   shown: { opacity: 1 },
-  hidden: { opacity: 0 }
+  hidden: { opacity: 0 },
 };
 
 const BackgroundLayer = styled(motion.div)`
@@ -81,30 +82,30 @@ const modalAnimation = (mobile = false): Variants => {
     shown: {
       top: 0,
       opacity: 1,
-      width: mobile ? "100vw" : "50vw",
+      width: mobile ? '100vw' : '50vw',
       transition: {
-        type: "spring",
+        type: 'spring',
         duration: 0.4,
         delayChildren: 0.2,
-        staggerChildren: 0.05
-      }
+        staggerChildren: 0.05,
+      },
     },
     hidden: {
-      top: "100%",
-      width: mobile ? "100vw" : "50vw",
+      top: '100%',
+      width: mobile ? '100vw' : '50vw',
       opacity: 0.4, // TODO(crookse) What's the reason for stopping at 0.4? Asking because a pause in animation is seen.
       transition: {
-        type: "spring",
-        duration: 0.4
-      }
-    }
+        type: 'spring',
+        duration: 0.4,
+      },
+    },
   };
 };
 
 const radius: Record<Radius, number> = {
   default: 30,
   minimal: 12,
-  none: 0
+  none: 0,
 };
 
 const ModalScreen = styled.div`
@@ -157,12 +158,12 @@ const ModalAnimator = withTheme(styled(motion.div as any)<any>`
   @media screen and (max-width: 720px) {
     max-width: 100vw;
   }
-`) as ForwardRefComponent<HTMLDivElement, HTMLMotionProps<"div">>;
+`) as ForwardRefComponent<HTMLDivElement, HTMLMotionProps<'div'>>;
 
 const ModalContents = withTheme(styled.div<{ theme: DefaultTheme }>`
   transition: background-color 0.23s ease-in-out;
   background-color: rgb(${(props) => props.theme.background});
-  border-radius: ${(props) => radius[props.theme.themeConfig.radius] + "px"};
+  border-radius: ${(props) => radius[props.theme.themeConfig.radius] + 'px'};
   width: 100%;
 
   @media screen and (max-width: 720px) {

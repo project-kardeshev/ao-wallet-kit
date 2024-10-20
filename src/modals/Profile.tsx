@@ -1,21 +1,22 @@
-import { CopyIcon, LogOutIcon, UserIcon } from "@iconicicons/react";
-import type { Radius } from "../components/Provider";
-import { Paragraph } from "../components/Paragraph";
-import { DefaultTheme, withTheme } from "../theme";
-import useActiveStrategy from "../hooks/strategy";
-import { Modal } from "../components/Modal/Modal";
-import useConnection from "../hooks/connection";
-import { Head } from "../components/Modal/Head";
-import { Button } from "../components/Button";
-import useGlobalState from "../hooks/global";
-import useGatewayURL from "../hooks/gateway";
-import { Title } from "../components/Title";
-import useBalance from "../hooks/balance";
-import { formatAddress } from "../utils";
-import { styled } from "@linaria/react";
-import useModal from "../hooks/modal";
-import useAns from "../hooks/useAns";
-import { useEffect } from "react";
+import { CopyIcon, LogOutIcon, UserIcon } from '@iconicicons/react';
+import { styled } from '@linaria/react';
+import { useEffect } from 'react';
+
+import { Button } from '../components/Button';
+import { Head } from '../components/Modal/Head';
+import { Modal } from '../components/Modal/Modal';
+import { Paragraph } from '../components/Paragraph';
+import type { Radius } from '../components/Provider';
+import { Title } from '../components/Title';
+import useBalance from '../hooks/balance';
+import useConnection from '../hooks/connection';
+import useGatewayURL from '../hooks/gateway';
+import useGlobalState from '../hooks/global';
+import useModal from '../hooks/modal';
+import useActiveStrategy from '../hooks/strategy';
+import useAns from '../hooks/useAns';
+import { DefaultTheme, withTheme } from '../theme';
+import { formatAddress } from '../utils/arweave';
 
 export function ProfileModal() {
   // modal controlls and statuses
@@ -23,16 +24,16 @@ export function ProfileModal() {
   const { state, dispatch } = useGlobalState();
 
   useEffect(() => {
-    modalController.setOpen(state?.activeModal === "profile");
+    modalController.setOpen(state?.activeModal === 'profile');
   }, [state?.activeModal]);
 
   useEffect(() => {
     if (modalController.open) return;
-    dispatch({ type: "CLOSE_MODAL" });
+    dispatch({ type: 'CLOSE_MODAL' });
   }, [modalController.open, dispatch]);
 
   function onClose() {
-    dispatch({ type: "CLOSE_MODAL" });
+    dispatch({ type: 'CLOSE_MODAL' });
   }
 
   // load balance
@@ -60,23 +61,23 @@ export function ProfileModal() {
           {!ans?.avatar && <ProfileIcon />}
           <ActiveStrategy strategyTheme={strategy?.theme}>
             <img
-              src={strategy?.logo ? `${gateway}/${strategy.logo}` : ""}
-              alt={strategy?.name || "active strategy logo"}
+              src={strategy?.logo ? `${gateway}/${strategy.logo}` : ''}
+              alt={strategy?.name || 'active strategy logo'}
               draggable={false}
             />
           </ActiveStrategy>
         </ProfilePicture>
         <Title>
-          {ans?.currentLabel || formatAddress(state?.activeAddress || "", 8)}
+          {ans?.currentLabel || formatAddress(state?.activeAddress || '', 8)}
           <CopyIcon
             onClick={() =>
-              navigator.clipboard.writeText(state.activeAddress || "")
+              navigator.clipboard.writeText(state.activeAddress || '')
             }
           />
         </Title>
         <Paragraph>
           {balance.toLocaleString(undefined, { maximumFractionDigits: 4 })}
-          {" AR"}
+          {' AR'}
         </Paragraph>
         <Button onClick={disconnect}>
           <LogOutIcon />
@@ -90,7 +91,7 @@ export function ProfileModal() {
 const btnRadius: Record<Radius, number> = {
   default: 18,
   minimal: 10,
-  none: 0
+  none: 0,
 };
 
 const ProfileData = withTheme(styled.div<{ theme: DefaultTheme }>`
@@ -125,15 +126,15 @@ const ProfileData = withTheme(styled.div<{ theme: DefaultTheme }>`
     width: 100%;
     padding: 0.9rem 0;
     border-radius: ${(props) =>
-      btnRadius[props.theme.themeConfig.radius] + "px"};
+      btnRadius[props.theme.themeConfig.radius] + 'px'};
     text-transform: none;
   }
 `);
 
 const pfpRadius: Record<Radius, string> = {
-  default: "100%",
-  minimal: "8px",
-  none: "none"
+  default: '100%',
+  minimal: '8px',
+  none: 'none',
 };
 
 const ProfilePicture = withTheme(styled.div<{
@@ -151,7 +152,7 @@ const ProfilePicture = withTheme(styled.div<{
   ${(props) =>
     props.profilePicture
       ? `background-image: url(${props.profilePicture});`
-      : ""}
+      : ''}
 `);
 
 const ActiveStrategy = withTheme(styled.div<{

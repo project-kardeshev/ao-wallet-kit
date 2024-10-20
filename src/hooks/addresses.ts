@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import useActiveStrategy from "./strategy";
-import useAddress from "./active_address";
-import useGlobalState from "./global";
+import { useEffect, useState } from 'react';
+
+import useAddress from './active_address';
+import useGlobalState from './global';
+import useActiveStrategy from './strategy';
 
 /**
  * Addresses added to the wallet
@@ -25,7 +26,7 @@ export default function useAddresses() {
           setAddresses(await strategy.getAllAddresses());
         } catch (e: any) {
           console.error(
-            `[Arweave Wallet Kit] Failed to sync addresses\n${e?.message || e}`
+            `[Arweave Wallet Kit] Failed to sync addresses\n${e?.message || e}`,
           );
         }
       };
@@ -33,9 +34,9 @@ export default function useAddresses() {
       await sync();
 
       // sync on focus
-      addEventListener("focus", sync);
+      addEventListener('focus', sync);
 
-      return () => removeEventListener("focus", sync);
+      return () => removeEventListener('focus', sync);
     })();
   }, [activeAddress, state, strategy]);
 
@@ -63,7 +64,9 @@ export function useWalletNames() {
         setNames(names);
       } catch (e: any) {
         console.error(
-          `[Arweave Wallet Kit] Failed to sync wallet names\n${e?.message || e}`
+          `[Arweave Wallet Kit] Failed to sync wallet names\n${
+            e?.message || e
+          }`,
         );
       }
     })();

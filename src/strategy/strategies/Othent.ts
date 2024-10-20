@@ -1,20 +1,26 @@
-import type { SignatureOptions } from "arweave/node/lib/crypto/crypto-interface";
-import type { DataItem, DispatchResult, GatewayConfig, PermissionType } from "arconnect";
-import type Transaction from "arweave/web/lib/transaction";
-import type { AppInfo } from "arweave-wallet-connector";
-import type Strategy from "../Strategy";
-import { Othent, OthentOptions, AppInfo as OthentAppInfo } from "@othent/kms";
+import { Othent, AppInfo as OthentAppInfo, OthentOptions } from '@othent/kms';
+import type {
+  DataItem,
+  DispatchResult,
+  GatewayConfig,
+  PermissionType,
+} from 'arconnect';
+import type { AppInfo } from 'arweave-wallet-connector';
+import type { SignatureOptions } from 'arweave/node/lib/crypto/crypto-interface';
+import type Transaction from 'arweave/web/lib/transaction';
+
+import type Strategy from '../Strategy';
 
 type ListenerFunction = (address: string) => void;
 
 export default class OthentStrategy implements Strategy {
-  public id: "othent" = "othent";
-  public name = "Othent";
+  public id: 'othent' = 'othent';
+  public name = 'Othent';
   public description =
-    "Othent JS SDK to manage Arweave wallets backed by Auth0 and Google Key Management Service.";
-  public theme = "35, 117, 239";
-  public logo = "33nBIUNlGK4MnWtJZQy9EzkVJaAd7WoydIKfkJoMvDs";
-  public url = "https://othent.io";
+    'Othent JS SDK to manage Arweave wallets backed by Auth0 and Google Key Management Service.';
+  public theme = '35, 117, 239';
+  public logo = '33nBIUNlGK4MnWtJZQy9EzkVJaAd7WoydIKfkJoMvDs';
+  public url = 'https://othent.io';
 
   #othent: Othent | null = null;
   #othentOptions: OthentOptions | null = null;
@@ -31,9 +37,9 @@ export default class OthentStrategy implements Strategy {
 
     try {
       const appInfo: OthentAppInfo = {
-        name: typeof location === "undefined" ? "UNKNOWN" : location.hostname,
-        version: "ArweaveWalletKit",
-        env: "",
+        name: typeof location === 'undefined' ? 'UNKNOWN' : location.hostname,
+        version: 'ArweaveWalletKit',
+        env: '',
       };
 
       this.#othent = new Othent({
@@ -43,9 +49,11 @@ export default class OthentStrategy implements Strategy {
       });
 
       // Note the cleanup function is not used here, which could cause issues with Othent is re-instantiated on the same tab.
-      this.#othent.addEventListener("auth", (userDetails) => {
+      this.#othent.addEventListener('auth', (userDetails) => {
         for (const listener of this.#addressListeners) {
-          listener((userDetails?.walletAddress || undefined) as unknown as string);
+          listener(
+            (userDetails?.walletAddress || undefined) as unknown as string,
+          );
         }
       });
 
@@ -54,7 +62,9 @@ export default class OthentStrategy implements Strategy {
         this.#othent.startTabSynching();
       }
     } catch (err) {
-      throw new Error(`[Arweave Wallet Kit] ${ (err instanceof Error && err.message) || err}`);
+      throw new Error(
+        `[Arweave Wallet Kit] ${(err instanceof Error && err.message) || err}`,
+      );
     }
 
     return this.#othent;
@@ -71,21 +81,25 @@ export default class OthentStrategy implements Strategy {
   public async connect(
     permissions: PermissionType[],
     appInfo?: AppInfo,
-    gateway?: GatewayConfig
+    gateway?: GatewayConfig,
   ) {
     const othent = this.#othentInstance();
 
     if (permissions) {
       console.warn(
-        "[Arweave Wallet Kit] Othent implicitly requires all permissions. Your `permissions` parameter will be ignored."
+        '[Arweave Wallet Kit] Othent implicitly requires all permissions. Your `permissions` parameter will be ignored.',
       );
     }
 
-    return othent.connect(
-      undefined,
-      appInfo ? { ...othent.appInfo, ...appInfo } as OthentAppInfo : undefined,
-      gateway,
-    ).then(() => undefined);
+    return othent
+      .connect(
+        undefined,
+        appInfo
+          ? ({ ...othent.appInfo, ...appInfo } as OthentAppInfo)
+          : undefined,
+        gateway,
+      )
+      .then(() => undefined);
   }
 
   public async disconnect() {
@@ -108,14 +122,14 @@ export default class OthentStrategy implements Strategy {
     return this.#othentInstance().getWalletNames();
   }
 
-  public async userDetails() {    
+  public async userDetails() {
     return this.#othentInstance().getUserDetails();
   }
 
   public async sign(transaction: Transaction, options?: SignatureOptions) {
     if (options) {
       console.warn(
-        "[Arweave Wallet Kit] Othent does not support `sign()` options"
+        '[Arweave Wallet Kit] Othent does not support `sign()` options',
       );
     }
 
@@ -127,33 +141,42 @@ export default class OthentStrategy implements Strategy {
   }
 
   public signDataItem(p: DataItem): Promise<ArrayBuffer> {
-    return this.#othentInstance().signDataItem(p)
+    return this.#othentInstance().signDataItem(p);
   }
 
-  public encrypt(data: BufferSource, options: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams): Promise<Uint8Array> {
+  public encrypt(
+    data: BufferSource,
+    options: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
+  ): Promise<Uint8Array> {
     if (options) {
       console.warn(
-        "[Arweave Wallet Kit] Othent does not support `encrypt()` options"
+        '[Arweave Wallet Kit] Othent does not support `encrypt()` options',
       );
     }
 
     return this.#othentInstance().encrypt(data);
   }
 
-  public decrypt(data: BufferSource, options: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams): Promise<Uint8Array> {
+  public decrypt(
+    data: BufferSource,
+    options: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
+  ): Promise<Uint8Array> {
     if (options) {
       console.warn(
-        "[Arweave Wallet Kit] Othent does not support `decrypt()` options"
+        '[Arweave Wallet Kit] Othent does not support `decrypt()` options',
       );
     }
 
     return this.#othentInstance().decrypt(data);
   }
 
-  public signature(data: Uint8Array, options: AlgorithmIdentifier | RsaPssParams | EcdsaParams): Promise<Uint8Array> {
+  public signature(
+    data: Uint8Array,
+    options: AlgorithmIdentifier | RsaPssParams | EcdsaParams,
+  ): Promise<Uint8Array> {
     if (options) {
       console.warn(
-        "[Arweave Wallet Kit] Othent does not support `signature()` options"
+        '[Arweave Wallet Kit] Othent does not support `signature()` options',
       );
     }
 
@@ -167,12 +190,13 @@ export default class OthentStrategy implements Strategy {
   public async getPermissions() {
     const othent = this.#othentInstance();
 
-    return othent.getSyncUserDetails() ? othent.getPermissions() : Promise.resolve([]);
-
+    return othent.getSyncUserDetails()
+      ? othent.getPermissions()
+      : Promise.resolve([]);
   }
 
   public async addToken(id: string): Promise<void> {
-    throw new Error("Not implemented");
+    throw new Error('Not implemented');
   }
 
   public addAddressEvent(listener: ListenerFunction) {
@@ -183,11 +207,11 @@ export default class OthentStrategy implements Strategy {
   }
 
   public removeAddressEvent(
-    listener: (e: CustomEvent<{ address: string }>) => void
+    listener: (e: CustomEvent<{ address: string }>) => void,
   ) {
     this.#addressListeners.splice(
       this.#addressListeners.indexOf(listener as any),
-      1
+      1,
     );
   }
 }

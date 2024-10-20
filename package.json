@@ -14,7 +14,7 @@
     "clean": "rm -rf dist",
     "nuke": "pnpm clean && rm -rf node_modules pnpm-lock.yaml",
     "test": "echo \"Warning: no test specified\"",
-    "fmt": "prettier . --write"
+    "format": "prettier . --write"
   },
   "files": [
     "dist"
@@ -30,16 +30,28 @@
     }
   },
   "dependencies": {
+    "@ar.io/sdk": "^2.3.2",
+    "@ardrive/turbo-sdk": "^1.19.1",
     "@callstack/react-theme-provider": "^3.0.8",
+    "@dha-team/arbundles": "^1.0.1",
+    "@ethersproject/bytes": "^5.7.0",
     "@iconicicons/react": "^1.5.1",
     "@linaria/babel-preset": "^4.4.5",
     "@linaria/core": "^4.2.10",
     "@linaria/react": "^4.3.8",
+    "@metamask/providers": "^18.1.0",
     "@othent/kms": "2.1.1",
+    "@tanstack/react-query": "^5.59.15",
+    "@wagmi/connectors": "^5.2.2",
+    "@wagmi/core": "^2.13.9",
     "arweave": "^1.12.2",
+    "arweave-graphql": "^0.0.5",
     "arweave-wallet-connector": "^1.0.2",
+    "ethers": "^6.13.4",
     "framer-motion": "^8.1.9",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "viem": "2.x",
+    "wagmi": "^2.12.19"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
@@ -53,14 +65,24 @@
     "@storybook/react": "^7.0.22",
     "@storybook/react-vite": "^7.0.22",
     "@storybook/testing-library": "^0.1.0",
-    "@types/node": "^18.11.18",
+    "@trivago/prettier-plugin-sort-imports": "^3.4.0",
+    "@types/node": "^18.19.54",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
     "@types/react-helmet": "^6.1.6",
     "@vitejs/plugin-react": "^3.0.0",
     "arconnect": "^1.0.4",
     "babel-loader": "^8.3.0",
-    "prettier": "^2.8.2",
+    "eslint": "^9.12.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "node-stdlib-browser": "^1.2.1",
+    "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup-plugin-preserve-directives": "^0.2.0",
@@ -69,7 +91,8 @@
     "vite": "^4.0.0",
     "vite-plugin-banner": "^0.7.0",
     "vite-plugin-css-injected-by-js": "^3.1.2",
-    "vite-plugin-dts": "^1.7.1"
+    "vite-plugin-dts": "^1.7.1",
+    "vite-plugin-node-stdlib-browser": "^0.2.1"
   },
   "peerDependencies": {
     "react": "^16.8.0 || 17.x || 18.x",

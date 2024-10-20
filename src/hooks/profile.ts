@@ -1,5 +1,6 @@
-import useGlobalState from "./global";
-import { useEffect } from "react";
+import { useEffect } from 'react';
+
+import useGlobalState from './global';
 
 export default function useProfileModal() {
   // global context
@@ -7,25 +8,25 @@ export default function useProfileModal() {
 
   // close modal on disconnect
   useEffect(() => {
-    if (state.activeStrategy || state.activeModal !== "profile") return;
-    dispatch({ type: "CLOSE_MODAL" });
+    if (state.activeStrategy || state.activeModal !== 'profile') return;
+    dispatch({ type: 'CLOSE_MODAL' });
   }, [state, dispatch]);
 
   return {
     setOpen(val: boolean) {
       if (!state.activeStrategy) {
-        throw new Error("[Arweave Wallet Kit] App not connected");
+        throw new Error('[Arweave Wallet Kit] App not connected');
       }
 
       if (val) {
         dispatch({
-          type: "OPEN_MODAL",
-          payload: "profile"
+          type: 'OPEN_MODAL',
+          payload: 'profile',
         });
       } else {
-        dispatch({ type: "CLOSE_MODAL" });
+        dispatch({ type: 'CLOSE_MODAL' });
       }
     },
-    open: state.activeModal === "profile"
+    open: state.activeModal === 'profile',
   };
 }

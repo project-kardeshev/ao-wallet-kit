@@ -1,15 +1,16 @@
-import { ArweaveWalletKit } from "../components/Provider";
-import { Modal } from "../components/Modal/Modal";
-import useConnection from "../hooks/connection";
-import { useEffect, useState } from "react";
-import useAddress from "../hooks/active_address";
-import useAddresses, { useWalletNames } from "../hooks/addresses";
-import useProfileModal from "../hooks/profile";
-import { useApi } from "../hooks/strategy";
+import { useEffect, useState } from 'react';
+
+import { Modal } from '../components/Modal/Modal';
+import { ArweaveWalletKit } from '../components/Provider';
+import useAddress from '../hooks/active_address';
+import useAddresses, { useWalletNames } from '../hooks/addresses';
+import useConnection from '../hooks/connection';
+import useProfileModal from '../hooks/profile';
+import { useApi } from '../hooks/strategy';
 
 export default {
-  name: "Modal",
-  component: Modal
+  name: 'Modal',
+  component: Modal,
 };
 
 export const Basic = () => {
@@ -17,14 +18,14 @@ export const Basic = () => {
     <ArweaveWalletKit
       config={{
         permissions: [
-          "ACCESS_ADDRESS",
-          "ACCESS_ALL_ADDRESSES",
-          "SIGN_TRANSACTION"
+          'ACCESS_ADDRESS',
+          'ACCESS_ALL_ADDRESSES',
+          'SIGN_TRANSACTION',
         ],
         ensurePermissions: true,
         appInfo: {
-          name: "Arweave Wallet Kit"
-        }
+          name: 'Arweave Wallet Kit',
+        },
       }}
     >
       <Button />
@@ -36,17 +37,17 @@ const Button = () => {
   const connection = useConnection();
   const address = useAddress();
 
-  const [status, setStatus] = useState("Idle...");
+  const [status, setStatus] = useState('Idle...');
 
   useEffect(() => {
-    setStatus(connection.connected ? "connected" : "disconnected");
+    setStatus(connection.connected ? 'connected' : 'disconnected');
   }, [connection.connected]);
 
   async function connect() {
     try {
       await connection.connect();
     } catch {
-      setStatus("cancelled");
+      setStatus('cancelled');
     }
   }
 
@@ -65,8 +66,8 @@ const Button = () => {
 
   useEffect(() => {
     if (!api) return;
-    if (api.id === "othent") {
-      console.log("f");
+    if (api.id === 'othent') {
+      console.log('f');
       api.userDetails().then((res) => console.log(res));
     }
     console.log(api.sign);
@@ -86,7 +87,7 @@ const Button = () => {
           }
         }}
       >
-        {connection.connected ? "disconnect" : "connect"}
+        {connection.connected ? 'disconnect' : 'connect'}
       </button>
       {status}
       <br />

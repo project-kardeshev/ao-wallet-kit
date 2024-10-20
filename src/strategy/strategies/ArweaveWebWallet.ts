@@ -2,23 +2,24 @@ import type {
   AppInfo,
   DataItem,
   GatewayConfig,
-  PermissionType
-} from "arconnect";
-import { ArweaveWebWallet } from "arweave-wallet-connector";
-import BrowserWalletStrategy from "./BrowserWallet";
-import type Strategy from "../Strategy";
+  PermissionType,
+} from 'arconnect';
+import { ArweaveWebWallet } from 'arweave-wallet-connector';
+
+import type Strategy from '../Strategy';
+import BrowserWalletStrategy from './BrowserWallet';
 
 export default class ArweaveWebWalletStrategy
   extends BrowserWalletStrategy
   implements Strategy
 {
   // @ts-expect-error
-  public id: "webwallet" = "webwallet";
-  public name = "Arweave.app";
-  public description = "Web based wallet software";
-  public theme = "24, 24, 24";
-  public logo = "qVms-k8Ox-eKFJN5QFvrPQvT9ryqQXaFcYbr-fJbgLY";
-  public url = "https://arweave.app";
+  public id: 'webwallet' = 'webwallet';
+  public name = 'Arweave.app';
+  public description = 'Web based wallet software';
+  public theme = '24, 24, 24';
+  public logo = 'qVms-k8Ox-eKFJN5QFvrPQvT9ryqQXaFcYbr-fJbgLY';
+  public url = 'https://arweave.app';
 
   #instance = new ArweaveWebWallet();
 
@@ -31,18 +32,18 @@ export default class ArweaveWebWalletStrategy
   }
 
   public async resumeSession() {
-    this.#instance.setUrl("arweave.app");
+    this.#instance.setUrl('arweave.app');
     await this.#instance.connect();
   }
 
   public async connect(
     permissions: PermissionType[],
     appInfo?: AppInfo,
-    gateway?: GatewayConfig
+    gateway?: GatewayConfig,
   ): Promise<void> {
     if (gateway) {
       console.warn(
-        "[Arweave Wallet Kit] Arweave.app does not support custom gateway connection yet."
+        '[Arweave Wallet Kit] Arweave.app does not support custom gateway connection yet.',
       );
     }
 
@@ -52,17 +53,17 @@ export default class ArweaveWebWalletStrategy
   }
 
   public addAddressEvent(listener: (address: string) => void) {
-    this.#instance.on("connect", listener);
+    this.#instance.on('connect', listener);
 
     return listener as any;
   }
 
   public removeAddressEvent(listener: any) {
-    this.#instance.off("connect", listener);
+    this.#instance.off('connect', listener);
   }
   public async signDataItem(p: DataItem): Promise<ArrayBuffer> {
     return await this.#instance.signDataItem(
-      p as Omit<DataItem, "signature"> & { data: string }
+      p as Omit<DataItem, 'signature'> & { data: string },
     );
   }
 }

@@ -1,4 +1,6 @@
-import type { PermissionType, AppInfo, GatewayConfig } from "arconnect";
+import type { AppInfo, GatewayConfig, PermissionType } from 'arconnect';
+
+import Strategy from '../strategy/Strategy';
 
 /** Basic action */
 export interface Action {
@@ -9,40 +11,40 @@ export interface Action {
 /** All actions */
 
 export interface OpenModalAction extends Action {
-  type: "OPEN_MODAL";
+  type: 'OPEN_MODAL';
   payload: ModalType;
 }
 
 export interface CloseModalAction extends Action {
-  type: "CLOSE_MODAL";
+  type: 'CLOSE_MODAL';
 }
 
 export interface DisconnectAction extends Action {
-  type: "DISCONNECT";
+  type: 'DISCONNECT';
 }
 
 export interface UpdateStrategyAction extends Action {
-  type: "UPDATE_STRATEGY";
+  type: 'UPDATE_STRATEGY';
   payload: string | false;
 }
 
 export interface UpdateConfig extends Action {
-  type: "UPDATE_CONFIG";
+  type: 'UPDATE_CONFIG';
   payload: Config;
 }
 
 export interface UpdateAddress extends Action {
-  type: "UPDATE_ADDRESS";
+  type: 'UPDATE_ADDRESS';
   payload: string;
 }
 
 export interface UpdatePermissions extends Action {
-  type: "UPDATE_PERMISSIONS";
+  type: 'UPDATE_PERMISSIONS';
   payload: PermissionType[];
 }
 
 /** Modal types */
-export type ModalType = "connect" | "profile";
+export type ModalType = 'connect' | 'profile';
 
 /** All possible actions for the global state reducer */
 export type Actions =
@@ -61,6 +63,7 @@ export interface GlobalState {
   config: Config;
   activeAddress?: string;
   givenPermissions: PermissionType[];
+  strategies: Strategy[];
 }
 
 /** Global config for the kit */

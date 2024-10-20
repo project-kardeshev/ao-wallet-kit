@@ -1,14 +1,15 @@
-import { STRATEGY_STORE, syncStrategies } from "../strategy";
-import type { Radius } from "../components/Provider";
-import { DefaultTheme, withTheme } from "../theme";
-import { Modal } from "../components/Modal/Modal";
-import type Strategy from "../strategy/Strategy";
-import type { Variants } from "framer-motion";
-import { Button } from "../components/Button";
-import useGlobalState from "../hooks/global";
-import { useEffect, useState } from "react";
-import useModal from "../hooks/modal";
-import { styled } from "@linaria/react";
+import { styled } from '@linaria/react';
+import type { Variants } from 'framer-motion';
+import { useEffect, useState } from 'react';
+
+import { Button } from '../components/Button';
+import { Modal } from '../components/Modal/Modal';
+import type { Radius } from '../components/Provider';
+import useGlobalState from '../hooks/global';
+import useModal from '../hooks/modal';
+import { STRATEGY_STORE, syncStrategies } from '../strategy';
+import type Strategy from '../strategy/Strategy';
+import { DefaultTheme, withTheme } from '../theme';
 
 export default function RestoreSession() {
   // modal controlls and statuses
@@ -23,7 +24,7 @@ export default function RestoreSession() {
     (async () => {
       const activeStrategy = await syncStrategies(
         state?.config.permissions || [],
-        !!state?.config.ensurePermissions
+        !!state?.config.ensurePermissions,
       );
 
       // we need to ask the user if they
@@ -41,8 +42,8 @@ export default function RestoreSession() {
         // the active strategy's previous session
         // does not need to be resumed manually
         dispatch({
-          type: "UPDATE_STRATEGY",
-          payload: (!!activeStrategy && activeStrategy.id) || false
+          type: 'UPDATE_STRATEGY',
+          payload: (!!activeStrategy && activeStrategy.id) || false,
         });
       }
     })();
@@ -51,7 +52,7 @@ export default function RestoreSession() {
   // remove previous session data
   function clearSession() {
     localStorage.removeItem(STRATEGY_STORE);
-    dispatch({ type: "DISCONNECT" });
+    dispatch({ type: 'DISCONNECT' });
   }
 
   // restore previous session
@@ -74,8 +75,8 @@ export default function RestoreSession() {
 
     // update active strategy
     dispatch({
-      type: "UPDATE_STRATEGY",
-      payload: (!!activeStrategy && activeStrategy.id) || false
+      type: 'UPDATE_STRATEGY',
+      payload: (!!activeStrategy && activeStrategy.id) || false,
     });
 
     // remove strategy
@@ -101,7 +102,7 @@ export default function RestoreSession() {
       noWatermark
     >
       <Text>
-        Would you like to restore your {strategyToRestore?.name + " " || ""}
+        Would you like to restore your {strategyToRestore?.name + ' ' || ''}
         session?
       </Text>
       <Buttons>
@@ -115,28 +116,28 @@ export default function RestoreSession() {
 const bottomModalVariants: Variants = {
   shown: {
     opacity: 1,
-    translateY: "-1.5rem",
+    translateY: '-1.5rem',
     transition: {
-      type: "spring",
+      type: 'spring',
       duration: 0.4,
       delayChildren: 0.2,
-      staggerChildren: 0.025
-    }
+      staggerChildren: 0.025,
+    },
   },
   hidden: {
     opacity: 0.4,
-    translateY: "200%",
+    translateY: '200%',
     transition: {
-      type: "spring",
-      duration: 0.4
-    }
-  }
+      type: 'spring',
+      duration: 0.4,
+    },
+  },
 };
 
 const radius: Record<Radius, number> = {
   default: 15,
   minimal: 8,
-  none: 0
+  none: 0,
 };
 
 const BottomModal = withTheme(styled(Modal as any)<any>`
@@ -145,7 +146,7 @@ const BottomModal = withTheme(styled(Modal as any)<any>`
   gap: 1.24rem;
   padding: 0.75rem 1rem;
   border-radius: ${(props) =>
-    radius[props.theme.themeConfig.radius as Radius] + "px"};
+    radius[props.theme.themeConfig.radius as Radius] + 'px'};
   border-radius: 15px;
   bottom: 0;
   right: 1.5rem;
