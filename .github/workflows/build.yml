@@ -58,6 +58,7 @@ jobs:
       - name: Send Slack notification
         uses: rtCamp/action-slack-notify@v2
         env:
+          SLACK_USERNAME: 'AO Wallet Kit'
           SLACK_TITLE: 'Build / E2E tests succeeded!'
           SLACK_COLOR: 'good'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
