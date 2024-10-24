@@ -162,6 +162,7 @@ export default class WagmiStrategy implements Strategy {
     );
 
     // Return the unsubscribe function to allow cleaning up the event listener if needed
+    // eslint-disable-next-line
     return (e: CustomEvent<{ address: string }>) => unsubscribe();
   }
 
@@ -170,7 +171,8 @@ export default class WagmiStrategy implements Strategy {
   ) {
     listener(new CustomEvent(this.account ?? ''));
   }
-
+  // unused apis, no need to lint - remove when used
+  /* eslint-disable */
   public async encrypt(
     data: BufferSource,
     algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,

@@ -67,8 +67,7 @@ export function useApi() {
     for (const key in strategy) {
       if (!omit.includes(key)) continue;
 
-      // @ts-expect-error
-      delete apiObj[key];
+      delete apiObj[key as keyof typeof apiObj];
     }
 
     return apiObj;

@@ -13,7 +13,7 @@ export default class ArweaveWebWalletStrategy
   extends BrowserWalletStrategy
   implements Strategy
 {
-  // @ts-expect-error
+  // @ts-expect-error - overriding for some reason
   public id: 'webwallet' = 'webwallet';
   public name = 'Arweave.app';
   public description = 'Web based wallet software';

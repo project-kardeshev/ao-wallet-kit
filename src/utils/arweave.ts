@@ -1,4 +1,5 @@
 import type { PermissionType } from 'arconnect';
+import 'arconnect';
 import type { Tag } from 'arweave/web/lib/transaction';
 
 import type { RGBObject } from '../components/Provider';
@@ -48,16 +49,13 @@ export const rgbToString = (rgb: RGBObject) => `${rgb.r}, ${rgb.g}, ${rgb.b}`;
 export async function callWindowApi(fn: string, params: any[] = []) {
   // if it is already injected
   if (window?.arweaveWallet) {
-    // @ts-expect-error
-    return await window.arweaveWallet[fn as any](...params);
+    return await (window as any).arweaveWallet[fn](...params);
   }
-
   // if it has not yet been injected
   return new Promise((resolve, reject) =>
     window.addEventListener('arweaveWalletLoaded', async () => {
       try {
-        // @ts-expect-error
-        resolve(await window.arweaveWallet[fn as any](...params));
+        resolve(await (window as any).arweaveWallet[fn](...params));
       } catch (e) {
         reject(e);
       }

@@ -138,6 +138,7 @@ export default class BrowserWalletStrategy implements Strategy {
     return await callWindowApi('getActivePublicKey');
   }
 
+  // eslint-disable-next-line
   public async addToken(id: string): Promise<void> {
     throw new Error('Not implemented');
   }

@@ -3,7 +3,7 @@ import type { PropsWithChildren } from 'react';
 
 import { DefaultTheme, withTheme } from '../../theme';
 
-export function Footer({ children }: PropsWithChildren<{}>) {
+export function Footer({ children }: PropsWithChildren<unknown>) {
   return <Wrapper>{children}</Wrapper>;
 }
 

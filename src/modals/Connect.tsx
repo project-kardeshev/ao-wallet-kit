@@ -150,7 +150,9 @@ export function ConnectModal() {
       document
         .querySelectorAll('.arconnect_connect_overlay_extension_temporary')
         .forEach((el) => el.remove());
-    } catch {}
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   // is the browser Brave

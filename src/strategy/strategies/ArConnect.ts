@@ -8,7 +8,7 @@ export default class ArConnectStrategy
   extends BrowserWalletStrategy
   implements Strategy
 {
-  // @ts-expect-error
+  // @ts-expect-error - overriding for some reason
   public id: 'arconnect' = 'arconnect';
   public name = 'ArConnect';
   public description = 'Non-custodial Arweave wallet for your favorite browser';

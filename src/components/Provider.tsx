@@ -17,8 +17,6 @@ import Strategy from '../strategy/Strategy';
 import { Font, ThemeProvider, darkTheme, lightTheme } from '../theme';
 import { rgbToString } from '../utils/arweave';
 
-('use client');
-
 export function ArweaveWalletKit({
   children,
   theme = defaultTheme,
@@ -94,7 +92,7 @@ export function ArweaveWalletKit({
   );
 }
 
-const AddressSync = ({ children }: PropsWithChildren<{}>) => {
+const AddressSync = ({ children }: PropsWithChildren<unknown>) => {
   useSyncPermissions();
   useSyncAddress();
 

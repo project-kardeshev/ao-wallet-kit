@@ -21,7 +21,7 @@ export async function syncStrategies(
   enforcePermissions: boolean,
   strategies: Strategy[],
 ) {
-  let activeStrategy: string | false =
+  const activeStrategy: string | false =
     localStorage?.getItem(STRATEGY_STORE) || false;
 
   if (activeStrategy && !!getStrategy(activeStrategy, strategies)) {

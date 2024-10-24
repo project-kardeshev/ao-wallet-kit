@@ -33,9 +33,12 @@
     "react/react-in-jsx-scope": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": ["error", {}],
+    "@typescript-eslint/prefer-as-const": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "no-useless-escape": "off",
     "react/no-children-prop": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "react/no-unescaped-entities": "off",
+    "no-irregular-whitespace": "off"
   }
 }

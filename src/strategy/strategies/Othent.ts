@@ -14,13 +14,13 @@ import type Strategy from '../Strategy';
 type ListenerFunction = (address: string) => void;
 
 export default class OthentStrategy implements Strategy {
-  public id: 'othent' = 'othent';
-  public name = 'Othent';
-  public description =
+  id: 'othent' = 'othent';
+  name = 'Othent';
+  description =
     'Othent JS SDK to manage Arweave wallets backed by Auth0 and Google Key Management Service.';
-  public theme = '35, 117, 239';
-  public logo = '33nBIUNlGK4MnWtJZQy9EzkVJaAd7WoydIKfkJoMvDs';
-  public url = 'https://othent.io';
+  theme = '35, 117, 239';
+  logo = '33nBIUNlGK4MnWtJZQy9EzkVJaAd7WoydIKfkJoMvDs';
+  url = 'https://othent.io';
 
   #othent: Othent | null = null;
   #othentOptions: OthentOptions | null = null;
@@ -195,6 +195,7 @@ export default class OthentStrategy implements Strategy {
       : Promise.resolve([]);
   }
 
+  // eslint-disable-next-line
   public async addToken(id: string): Promise<void> {
     throw new Error('Not implemented');
   }

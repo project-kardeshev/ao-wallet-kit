@@ -54,7 +54,9 @@ const Button = () => {
   async function disconnect() {
     try {
       await connection.disconnect();
-    } catch {}
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   const addresses = useAddresses();
@@ -68,7 +70,7 @@ const Button = () => {
     if (!api) return;
     if (api.id === 'othent') {
       console.log('f');
-      api.userDetails().then((res) => console.log(res));
+      (api as any).userDetails().then((res: any) => console.log(res));
     }
     console.log(api.sign);
   }, [api]);

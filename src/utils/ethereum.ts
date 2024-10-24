@@ -86,7 +86,7 @@ export async function getNormalizedArweaveAddressFromClient(
 export function createBrowserEthereumDataItemSigner(
   ethersProvider: BrowserProvider | JsonRpcApiProvider,
 ) {
-  const signer = async ({ data, tags, target, anchor }: any) => {
+  const signer = async ({ data, tags, target }: any) => {
     const ethersSigner = await ethersProvider.getSigner();
     const provider = {
       getSigner: () => ({

@@ -8,6 +8,7 @@ import type { Radius } from '../components/Provider';
 import useGlobalState from '../hooks/global';
 import useModal from '../hooks/modal';
 import { STRATEGY_STORE, syncStrategies } from '../strategy';
+import strategies from '../strategy';
 import type Strategy from '../strategy/Strategy';
 import { DefaultTheme, withTheme } from '../theme';
 
@@ -25,6 +26,7 @@ export default function RestoreSession() {
       const activeStrategy = await syncStrategies(
         state?.config.permissions || [],
         !!state?.config.ensurePermissions,
+        strategies,
       );
 
       // we need to ask the user if they
@@ -33,7 +35,6 @@ export default function RestoreSession() {
       // because opening popups without user
       // action is disabled by default in the
       // browser
-      // @ts-expect-error
       if (!!activeStrategy && !!activeStrategy.resumeSession) {
         setStrategyToRestore(activeStrategy as Strategy);
         modalController.setOpen(true);
@@ -59,7 +60,7 @@ export default function RestoreSession() {
   async function restore() {
     let activeStrategy: Strategy | false = false;
 
-    if (!!strategyToRestore?.resumeSession) {
+    if (strategyToRestore?.resumeSession) {
       activeStrategy = strategyToRestore;
 
       try {
@@ -67,13 +68,9 @@ export default function RestoreSession() {
       } catch {
         activeStrategy = false;
       }
-    }
-
-    // remove modal & strategy to restore
+    } // remove modal & strategy to restore
     setStrategyToRestore(undefined);
-    modalController.setOpen(false);
-
-    // update active strategy
+    modalController.setOpen(false); // update active strategy
     dispatch({
       type: 'UPDATE_STRATEGY',
       payload: (!!activeStrategy && activeStrategy.id) || false,
