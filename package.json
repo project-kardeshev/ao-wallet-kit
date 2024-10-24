@@ -1,23 +1,29 @@
 {
-  "name": "arweave-wallet-kit",
+  "name": "@project-kardeshev/ao-wallet-kit",
   "private": false,
-  "version": "1.0.7",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/project-kardeshev/ao-wallet-kit.git"
+  },
+  "author": {
+    "name": "Atticus",
+    "email": "atticusofsparta@protonmail.com",
+    "website": "https://atticus.arweave.net"
+  },
   "type": "module",
   "publishConfig": {
     "access": "public"
   },
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "clean": "rm -rf dist",
-    "nuke": "pnpm clean && rm -rf node_modules pnpm-lock.yaml",
-    "test": "echo \"Warning: no test specified\"",
-    "format": "prettier . --write"
-  },
-  "files": [
-    "dist"
+  "keywords": [
+    "arweave",
+    "ethereum",
+    "atomic-assets",
+    "wallet",
+    "react",
+    "ar",
+    "blockchain",
+    "ao"
   ],
   "main": "./dist/index.umd.js",
   "module": "./dist/index.es.js",
@@ -28,6 +34,22 @@
       "import": "./dist/index.es.js",
       "require": "./dist/index.umd.js"
     }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && yarn build-storybook",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "build-docs": "typedoc --out docs src",
+    "test": "echo \"Warning: no test specified\"",
+    "format": "prettier . --write",
+    "lint": "eslint src"
   },
   "dependencies": {
     "@ar.io/sdk": "^2.3.2",
@@ -47,6 +69,7 @@
     "arweave": "^1.12.2",
     "arweave-graphql": "^0.0.5",
     "arweave-wallet-connector": "^1.0.2",
+    "bunyan": "^1.8.15",
     "ethers": "^6.13.4",
     "framer-motion": "^8.1.9",
     "react-helmet": "^6.1.0",
@@ -54,10 +77,18 @@
     "wagmi": "^2.12.19"
   },
   "devDependencies": {
+    "husky": "^8.0.3",
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
     "@babel/core": "^7.20.12",
     "@babel/preset-react": "^7.22.5",
     "@babel/preset-typescript": "^7.22.5",
     "@linaria/vite": "^4.2.11",
+    "semantic-release": "^21.0.7",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^11.0.3",
     "@storybook/addon-actions": "^7.0.22",
     "@storybook/addon-essentials": "^7.0.22",
     "@storybook/addon-interactions": "^7.0.22",
@@ -87,15 +118,25 @@
     "react-dom": "^18.2.0",
     "rollup-plugin-preserve-directives": "^0.2.0",
     "storybook": "^7.0.22",
+    "typedoc": "^0.26.10",
     "typescript": "^4.9.3",
     "vite": "^4.0.0",
     "vite-plugin-banner": "^0.7.0",
     "vite-plugin-css-injected-by-js": "^3.1.2",
     "vite-plugin-dts": "^1.7.1",
-    "vite-plugin-node-stdlib-browser": "^0.2.1"
+    "vite-plugin-node-stdlib-browser": "^0.2.1",
+    "markdown-toc-gen": "^1.0.1"
   },
   "peerDependencies": {
     "react": "^16.8.0 || 17.x || 18.x",
     "react-dom": "^16.8.0 || 17.x || 18.x"
+  },
+  "lint-staged": {
+    "**/*.{ts,js,mjs,cjs,md,json}": [
+      "prettier --write ."
+    ],
+    "**/README.md": [
+      "markdown-toc-gen insert"
+    ]
   }
 }

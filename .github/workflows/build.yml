@@ -1,0 +1,63 @@
+name: Build and Test
+
+concurrency:
+  group: ${{ github.ref_name }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - alpha
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node_version: [18.x, 20.x]
+        command: ['lint', 'format', 'build']
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set Up node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node_version }}
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn --immutable --immutable-cache
+
+      - run: yarn ${{ matrix.command }}
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set Up node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn --immutable --immutable-cache
+
+      - name: Run tests
+        run: yarn test
+
+  notify:
+    needs: [build, test]
+    if: success()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: 'Build / E2E tests succeeded!'
+          SLACK_COLOR: 'good'
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
