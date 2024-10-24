@@ -4,3 +4,4 @@ export * from './hooks';
 export * from './modals';
 export * from './utils';
 export * from './strategy';
+export * from './version';
