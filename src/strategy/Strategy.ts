@@ -1,12 +1,12 @@
-import type { SignatureOptions } from "arweave/node/lib/crypto/crypto-interface";
-import type Transaction from "arweave/node/lib/transaction";
 import type {
-  PermissionType,
   AppInfo,
-  GatewayConfig,
+  DataItem,
   DispatchResult,
-  DataItem
-} from "arconnect";
+  GatewayConfig,
+  PermissionType,
+} from 'arconnect';
+import type { SignatureOptions } from 'arweave/node/lib/crypto/crypto-interface';
+import type Transaction from 'arweave/node/lib/transaction';
 
 export default abstract class Strategy {
   // info
@@ -25,7 +25,7 @@ export default abstract class Strategy {
   public abstract connect(
     permissions: PermissionType[],
     appInfo?: AppInfo,
-    gateway?: GatewayConfig
+    gateway?: GatewayConfig,
   ): Promise<void>;
   public abstract disconnect(): Promise<void>;
 
@@ -34,22 +34,22 @@ export default abstract class Strategy {
   public abstract getAllAddresses?(): Promise<string[]>;
   public abstract sign(
     transaction: Transaction,
-    options?: SignatureOptions
+    options?: SignatureOptions,
   ): Promise<Transaction>;
   public abstract getPermissions(): Promise<PermissionType[]>;
   public abstract getWalletNames?(): Promise<{ [addr: string]: string }>;
   public abstract encrypt?(
     data: BufferSource,
-    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams
+    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
   ): Promise<Uint8Array>;
   public abstract decrypt?(
     data: BufferSource,
-    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams
+    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
   ): Promise<Uint8Array>;
   public abstract getArweaveConfig?(): Promise<GatewayConfig>;
   public abstract signature?(
     data: Uint8Array,
-    algorithm: AlgorithmIdentifier | RsaPssParams | EcdsaParams
+    algorithm: AlgorithmIdentifier | RsaPssParams | EcdsaParams,
   ): Promise<Uint8Array>;
   public abstract getActivePublicKey?(): Promise<string>;
   public abstract addToken?(id: string): Promise<void>;
@@ -60,10 +60,10 @@ export default abstract class Strategy {
 
   /** Events */
   public abstract addAddressEvent?(
-    listener: (address: string) => void
+    listener: (address: string) => void,
   ): (e: CustomEvent<{ address: string }>) => void;
   public abstract removeAddressEvent?(
-    listener: (e: CustomEvent<{ address: string }>) => void
+    listener: (e: CustomEvent<{ address: string }>) => void,
   ): void;
   public abstract signDataItem(p: DataItem): Promise<ArrayBuffer>;
 }

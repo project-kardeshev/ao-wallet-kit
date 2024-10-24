@@ -155,7 +155,7 @@ await connect();
 await disconnect();
 
 // is there a strategy connected?
-connected ? "wallet connected" : "no connected wallet";
+connected ? 'wallet connected' : 'no connected wallet';
 ```
 
 ### `useApi`

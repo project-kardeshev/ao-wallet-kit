@@ -1,36 +1,38 @@
-import { AppIcon, Application, Logo } from "../components/Application";
-import strategies, { getStrategy, saveStrategy } from "../strategy";
-import { Title, TitleWithParagraph } from "../components/Title";
-import { useEffect, useMemo, useState } from "react";
-import { ChevronLeftIcon } from "@iconicicons/react";
-import type { Radius } from "../components/Provider";
-import { Paragraph } from "../components/Paragraph";
-import { Footer } from "../components/Modal/Footer";
-import { DefaultTheme, withTheme } from "../theme";
-import { Modal } from "../components/Modal/Modal";
-import type Strategy from "../strategy/Strategy";
-import { Loading } from "../components/Loading";
-import { Head } from "../components/Modal/Head";
-import useConnection from "../hooks/connection";
-import { Button } from "../components/Button";
-import useGlobalState from "../hooks/global";
-import useGatewayURL from "../hooks/gateway";
-import { styled } from "@linaria/react";
-import useModal from "../hooks/modal";
+import { ChevronLeftIcon } from '@iconicicons/react';
+import { styled } from '@linaria/react';
+import { useEffect, useMemo, useState } from 'react';
+
+import { AppIcon, Application, Logo } from '../components/Application';
+import { Button } from '../components/Button';
+import { Loading } from '../components/Loading';
+import { Footer } from '../components/Modal/Footer';
+import { Head } from '../components/Modal/Head';
+import { Modal } from '../components/Modal/Modal';
+import { Paragraph } from '../components/Paragraph';
+import type { Radius } from '../components/Provider';
+import { Title, TitleWithParagraph } from '../components/Title';
+import useConnection from '../hooks/connection';
+import useGatewayURL from '../hooks/gateway';
+import useGlobalState from '../hooks/global';
+import useModal from '../hooks/modal';
+import { getStrategy, saveStrategy } from '../strategy';
+import type Strategy from '../strategy/Strategy';
+import { DefaultTheme, withTheme } from '../theme';
 
 export function ConnectModal() {
-  // modal controlls and statuses
+  // modal controls and statuses
   const modalController = useModal();
   const { state, dispatch } = useGlobalState();
+  const strategies = useMemo(() => state.strategies, [state]);
 
   useEffect(() => {
-    modalController.setOpen(state?.activeModal === "connect");
+    modalController.setOpen(state?.activeModal === 'connect');
   }, [state?.activeModal]);
 
   useEffect(() => {
     if (modalController.open) return;
     setSelectedStrategy(undefined);
-    dispatch({ type: "CLOSE_MODAL" });
+    dispatch({ type: 'CLOSE_MODAL' });
   }, [modalController.open]);
 
   // connection
@@ -38,8 +40,8 @@ export function ConnectModal() {
 
   // close modal if the user is connected
   useEffect(() => {
-    if (!connected || state?.activeModal !== "connect") return;
-    dispatch({ type: "CLOSE_MODAL" });
+    if (!connected || state?.activeModal !== 'connect') return;
+    dispatch({ type: 'CLOSE_MODAL' });
   }, [connected, state]);
 
   // selected strategy
@@ -47,8 +49,9 @@ export function ConnectModal() {
 
   // selected strategy data
   const strategyData = useMemo(
-    () => (selectedStrategy ? getStrategy(selectedStrategy) : undefined),
-    [selectedStrategy, strategies]
+    () =>
+      selectedStrategy ? getStrategy(selectedStrategy, strategies) : undefined,
+    [selectedStrategy, strategies],
   );
 
   // loadings
@@ -75,7 +78,7 @@ export function ConnectModal() {
     let available = false;
 
     try {
-      available = await s.isAvailable();
+      available = Boolean(await s.isAvailable());
     } catch {
       available = false;
     }
@@ -100,30 +103,30 @@ export function ConnectModal() {
       await s.connect(
         state.config.permissions,
         state.config.appInfo,
-        state.config.gatewayConfig
+        state.config.gatewayConfig,
       );
 
       // send success message
       postMessage({
-        type: "connect_result",
-        res: true
+        type: 'connect_result',
+        res: true,
       });
 
       // close modal
-      dispatch({ type: "CLOSE_MODAL" });
+      dispatch({ type: 'CLOSE_MODAL' });
 
       // save strategy
       saveStrategy(s.id);
       dispatch({
-        type: "UPDATE_STRATEGY",
-        payload: s.id
+        type: 'UPDATE_STRATEGY',
+        payload: s.id,
       });
     } catch {
       fixupArConnectModal();
       setRetry(true);
       dispatch({
-        type: "UPDATE_STRATEGY",
-        payload: false
+        type: 'UPDATE_STRATEGY',
+        payload: false,
       });
     }
 
@@ -133,10 +136,10 @@ export function ConnectModal() {
   // on connect modal close
   function onClose() {
     postMessage({
-      type: "connect_result",
-      res: false
+      type: 'connect_result',
+      res: false,
     });
-    dispatch({ type: "CLOSE_MODAL" });
+    dispatch({ type: 'CLOSE_MODAL' });
   }
 
   // active gateway url
@@ -145,9 +148,11 @@ export function ConnectModal() {
   function fixupArConnectModal() {
     try {
       document
-        .querySelectorAll(".arconnect_connect_overlay_extension_temporary")
+        .querySelectorAll('.arconnect_connect_overlay_extension_temporary')
         .forEach((el) => el.remove());
-    } catch {}
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   // is the browser Brave
@@ -155,8 +160,8 @@ export function ConnectModal() {
 
   useEffect(() => {
     (async () => {
-      // @ts-expect-error
-      const brave: boolean = navigator.brave && await navigator.brave.isBrave();
+      const brave: boolean =
+        (navigator as any).brave && (await (navigator as any).brave.isBrave());
 
       setIsBrave(brave);
     })();
@@ -173,7 +178,7 @@ export function ConnectModal() {
           }}
         >
           {selectedStrategy && <BackButton />}
-          {strategyData ? strategyData.name : "Connect wallet"}
+          {strategyData ? strategyData.name : 'Connect wallet'}
         </Title>
       </Head>
       {(!selectedStrategy && (
@@ -193,17 +198,21 @@ export function ConnectModal() {
         <Connecting>
           <WalletData>
             <AppIcon colorTheme={strategyData?.theme}>
-              <Logo src={`${gateway}/${strategyData?.logo}`} draggable={false} />
+              <Logo
+                src={`${gateway}/${strategyData?.logo}`}
+                draggable={false}
+              />
             </AppIcon>
             {(strategyAvailable && (
               <>
-                <Title small>Connecting to {strategyData?.name || ""}...</Title>
+                <Title small>Connecting to {strategyData?.name || ''}...</Title>
                 <Paragraph>
                   Confirm connection request in the wallet popup window
                 </Paragraph>
-                {strategyData?.id === "othent" && isBrave && (
+                {strategyData?.id === 'othent' && isBrave && (
                   <BraveParagraph>
-                    You might need to <b>disable Brave shields</b> for this to work properly.
+                    You might need to <b>disable Brave shields</b> for this to
+                    work properly.
                   </BraveParagraph>
                 )}
                 {retry && strategyData && (
@@ -218,24 +227,20 @@ export function ConnectModal() {
               (!loadingAvailability && (
                 <>
                   <Title small>
-                    {strategyData?.name || ""} is not available.
+                    {strategyData?.name || ''} is not available.
                   </Title>
                   <Paragraph>
                     If you don't have it yet, you can try to download it
                   </Paragraph>
-                  {
-                    // @ts-expect-error
-                    strategyData?.url && (
-                      <Button
-                        onClick={() => {
-                          // @ts-expect-error
-                          window.open(strategyData.url);
-                        }}
-                      >
-                        Download
-                      </Button>
-                    )
-                  }
+                  {strategyData?.url && (
+                    <Button
+                      onClick={() => {
+                        window.open(strategyData.url);
+                      }}
+                    >
+                      Download
+                    </Button>
+                  )}
                 </>
               ))}
             {(connecting || loadingAvailability) && <ConnectLoading />}
@@ -249,7 +254,7 @@ export function ConnectModal() {
             Click to learn more about the permaweb & wallets.
           </Paragraph>
         </TitleWithParagraph>
-        <Button onClick={() => window.open("https://arwiki.wiki/#/en/wallets")}>
+        <Button onClick={() => window.open('https://arwiki.wiki/#/en/wallets')}>
           Get
         </Button>
       </Footer>
@@ -305,15 +310,15 @@ const WalletData = styled.div`
 const radius: Record<Radius, number> = {
   default: 14,
   minimal: 8,
-  none: 0
+  none: 0,
 };
 
 const BraveParagraph = withTheme(styled(Paragraph)<{ theme: DefaultTheme }>`
   background-color: rgba(251, 85, 43, 0.2);
   color: #fb542b;
-  padding: .44rem;
-  border-radius: ${props => radius[props.theme.themeConfig.radius] + "px"};
-  margin-top: .6rem;
+  padding: 0.44rem;
+  border-radius: ${(props) => radius[props.theme.themeConfig.radius] + 'px'};
+  margin-top: 0.6rem;
 `);
 
 const ConnectLoading = withTheme(styled(Loading)<{ theme: DefaultTheme }>`

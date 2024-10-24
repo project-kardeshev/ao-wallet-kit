@@ -1,13 +1,15 @@
-import type { Actions, GlobalState } from "./faces";
-import { Dispatch, createContext } from "react";
+import { Dispatch, createContext } from 'react';
+
+import type { Actions, GlobalState } from './faces';
 
 export const defaultState: GlobalState = {
   activeModal: false,
   activeStrategy: false,
   givenPermissions: [],
   config: {
-    permissions: []
-  }
+    permissions: [],
+  },
+  strategies: [],
 };
 
 const context = createContext<{

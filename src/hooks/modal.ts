@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function useModal(defaultOpen = false) {
   const [open, setOpen] = useState(defaultOpen);
@@ -8,7 +8,7 @@ export default function useModal(defaultOpen = false) {
     open,
     bindings: {
       open,
-      onClose: () => setOpen(false)
-    }
+      onClose: () => setOpen(false),
+    },
   };
 }

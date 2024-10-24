@@ -1,35 +1,35 @@
-import { createTheming, ThemingType } from "@callstack/react-theme-provider";
+import { ThemingType, createTheming } from '@callstack/react-theme-provider';
 
 export const lightTheme: DisplayTheme = {
-  primaryText: "0, 0, 0",
-  background: "255, 255, 255",
-  secondaryText: "146, 146, 147",
-  light: "242, 242, 247"
+  primaryText: '0, 0, 0',
+  background: '255, 255, 255',
+  secondaryText: '146, 146, 147',
+  light: '242, 242, 247',
 };
 
 export const darkTheme: DisplayTheme = {
-  primaryText: "240, 240, 240",
-  background: "26, 27, 31",
-  secondaryText: "161, 161, 161",
-  light: "44, 45, 49"
+  primaryText: '240, 240, 240',
+  background: '26, 27, 31',
+  secondaryText: '161, 161, 161',
+  light: '44, 45, 49',
 };
 
 const defaultThemeConfig: ThemeConfig = {
-  displayTheme: "light",
+  displayTheme: 'light',
   accent: {
     r: 0,
     g: 0,
-    b: 0
+    b: 0,
   },
   titleHighlight: {
     r: 0,
     g: 122,
-    b: 255
+    b: 255,
   },
-  radius: "default",
+  radius: 'default',
   font: {
-    fontFamily: "Manrope"
-  }
+    fontFamily: 'Manrope',
+  },
 };
 
 export interface DisplayTheme {
@@ -40,7 +40,7 @@ export interface DisplayTheme {
 }
 
 export interface ThemeConfig {
-  displayTheme: "dark" | "light";
+  displayTheme: 'dark' | 'light';
   accent: RGBObject;
   titleHighlight: RGBObject;
   radius: Radius;
@@ -48,7 +48,7 @@ export interface ThemeConfig {
 }
 
 export interface DefaultTheme extends DisplayTheme {
-  displayTheme: "dark" | "light";
+  displayTheme: 'dark' | 'light';
   theme: string;
   themeConfig: ThemeConfig;
 }
@@ -59,17 +59,17 @@ export interface RGBObject {
   b: number;
 }
 
-export type Radius = "default" | "minimal" | "none";
+export type Radius = 'default' | 'minimal' | 'none';
 
 export interface Font {
   fontFamily: string;
 }
 
 const theming: ThemingType<DefaultTheme> = createTheming<DefaultTheme>({
-  displayTheme: "light",
-  theme: "0, 0, 0",
+  displayTheme: 'light',
+  theme: '0, 0, 0',
   themeConfig: defaultThemeConfig,
-  ...lightTheme
+  ...lightTheme,
 });
 
 export const { ThemeProvider, useTheme } = theming;
@@ -85,4 +85,4 @@ export const { ThemeProvider, useTheme } = theming;
 // the users need to wrap their application with the
 // <ArweaveWalletKit> component anyway
 export const withTheme =
-  theming.withTheme || ((val) => val as ThemingType<DefaultTheme>["withTheme"]);
+  theming.withTheme || ((val) => val as ThemingType<DefaultTheme>['withTheme']);

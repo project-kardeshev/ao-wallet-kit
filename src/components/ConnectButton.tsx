@@ -1,15 +1,16 @@
-import { ChevronDownIcon, UserIcon } from "@iconicicons/react";
-import { DefaultTheme, withTheme } from "../theme";
-import useAddress from "../hooks/active_address";
-import useConnection from "../hooks/connection";
-import useProfileModal from "../hooks/profile";
-import useBalance from "../hooks/balance";
-import { formatAddress } from "../utils";
-import type { Radius } from "./Provider";
-import { styled } from "@linaria/react";
-import type { HTMLProps } from "react";
-import useAns from "../hooks/useAns";
-import { Button } from "./Button";
+import { ChevronDownIcon, UserIcon } from '@iconicicons/react';
+import { styled } from '@linaria/react';
+import type { HTMLProps } from 'react';
+
+import useAddress from '../hooks/active_address';
+import useBalance from '../hooks/balance';
+import useConnection from '../hooks/connection';
+import useProfileModal from '../hooks/profile';
+import useAns from '../hooks/useAns';
+import { DefaultTheme, withTheme } from '../theme';
+import { formatAddress } from '../utils/arweave';
+import { Button } from './Button';
+import type { Radius } from './Provider';
 
 export default function ConnectButton({
   accent,
@@ -52,7 +53,7 @@ export default function ConnectButton({
           {showBalance && (
             <Balance>
               {balance.toLocaleString(undefined, { maximumFractionDigits: 2 }) +
-                " AR"}
+                ' AR'}
             </Balance>
           )}
           <ProfileSection showBalance={showBalance}>
@@ -68,7 +69,7 @@ export default function ConnectButton({
               </>
             )}
             {(ansOption && ans?.currentLabel) ||
-              formatAddress(address || "", 5)}
+              formatAddress(address || '', 5)}
             <ExpandIcon />
           </ProfileSection>
         </>
@@ -80,14 +81,14 @@ export default function ConnectButton({
 const radius: Record<Radius, number> = {
   default: 18,
   minimal: 10,
-  none: 0
+  none: 0,
 };
 
 const Wrapper = withTheme(styled(Button)<{
   accent?: string;
   theme: DefaultTheme;
 }>`
-  border-radius: ${(props) => radius[props.theme.themeConfig.radius] + "px"};
+  border-radius: ${(props) => radius[props.theme.themeConfig.radius] + 'px'};
   text-transform: none;
   padding: 0.3rem;
   background-color: ${(props) => props.accent || `rgb(${props.theme.theme})`};
@@ -105,12 +106,12 @@ const ProfileSection = withTheme(styled.div<{
   display: flex;
   align-items: center;
   background-color: rgb(
-    ${(props) => (props.showBalance ? props.theme.background : "transparent")},
+    ${(props) => (props.showBalance ? props.theme.background : 'transparent')},
     0.2
   );
   height: 2.6rem;
   border-radius: ${(props) =>
-    radius[props.theme.themeConfig.radius] - 3 + "px"};
+    radius[props.theme.themeConfig.radius] - 3 + 'px'};
   padding: 0 0.3rem 0 0.6rem;
   gap: 0.25rem;
 `);
@@ -124,9 +125,9 @@ const ExpandIcon = styled(ChevronDownIcon)`
 `;
 
 const avatarRadius: Record<Radius, string> = {
-  default: "100%",
-  minimal: "5px",
-  none: "0px"
+  default: '100%',
+  minimal: '5px',
+  none: '0px',
 };
 
 const Avatar = withTheme(styled.img<{ theme: DefaultTheme }>`
