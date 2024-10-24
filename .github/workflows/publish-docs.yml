@@ -7,7 +7,6 @@ concurrency:
 on:
   push:
     branches:
-      - alpha
       - main
   workflow_dispatch:
   workflow_call:
