@@ -1,22 +1,29 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
-    "skipLibCheck": true,
-    "esModuleInterop": false,
+    "target": "esnext",
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "lib": ["esnext", "DOM"],
+    "outDir": "./lib/esm",
+    "listEmittedFiles": false,
+    "listFiles": false,
+    "moduleResolution": "node",
+    "module": "esnext",
+    "alwaysStrict": true,
+    "types": ["node", "DOM"],
     "forceConsistentCasingInFileNames": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "esModuleInterop": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "typeRoots": ["./node_modules/@types", "./src/types"] // <- Add this line
+    "declaration": true,
+    "declarationDir": "./lib/types",
+    /* Additional Checks */
+    "pretty": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "exclude": ["node_modules"]
 }

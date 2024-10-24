@@ -2,6 +2,8 @@ import useConnect from './connect';
 import useConnected from './connected';
 import useDisconnect from './disconnect';
 
+export { useConnect, useConnected, useDisconnect };
+
 /**
  * Base connection hook
  */

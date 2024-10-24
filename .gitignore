@@ -6,7 +6,10 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
+storybook-static
+docs
+wallet.json
+publish-wallet.json
 node_modules
 dist
 dist-ssr
