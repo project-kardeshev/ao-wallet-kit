@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import useActiveStrategy from "./strategy";
-import useGlobalState from "./global";
+import { useEffect, useState } from 'react';
+
+import useGlobalState from './global';
+import useActiveStrategy from './strategy';
 
 /**
  * Active address in the wallet
@@ -27,12 +28,12 @@ export async function useSyncAddress() {
           const address = await strategy.getActiveAddress();
 
           dispatch({
-            type: "UPDATE_ADDRESS",
-            payload: address
+            type: 'UPDATE_ADDRESS',
+            payload: address,
           });
         } catch (e: any) {
           console.error(
-            `[Arweave Wallet Kit] Failed to sync address\n${e?.message || e}`
+            `[Arweave Wallet Kit] Failed to sync address\n${e?.message || e}`,
           );
         }
       };
@@ -41,20 +42,20 @@ export async function useSyncAddress() {
 
       const listener = strategy.addAddressEvent?.((addr) =>
         dispatch({
-          type: "UPDATE_ADDRESS",
-          payload: addr
-        })
+          type: 'UPDATE_ADDRESS',
+          payload: addr,
+        }),
       );
 
       // check address change on focus
-      addEventListener("focus", sync);
+      addEventListener('focus', sync);
 
       return () => {
         if (listener && strategy.removeAddressEvent) {
           strategy.removeAddressEvent(listener);
         }
 
-        removeEventListener("focus", sync);
+        removeEventListener('focus', sync);
       };
     })();
   }, [strategy, dispatch]);

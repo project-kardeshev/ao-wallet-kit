@@ -1,10 +1,11 @@
-import type { ConnectMsg } from "./connection/connect";
-import { STRATEGY_STORE } from "../strategy";
-import useActiveStrategy from "./strategy";
-import useGlobalState from "./global";
-import { useEffect, useRef } from "react";
-import { comparePermissions } from "../utils";
-import type { PermissionType } from "arconnect";
+import type { PermissionType } from 'arconnect';
+import { useEffect, useRef } from 'react';
+
+import { STRATEGY_STORE } from '../strategy';
+import { comparePermissions } from '../utils/arweave';
+import type { ConnectMsg } from './connection/connect';
+import useGlobalState from './global';
+import useActiveStrategy from './strategy';
 
 /**
  * Given permissions hook
@@ -29,8 +30,8 @@ export default function usePermissions(): PermissionType[] {
 
       // dispatch to the global state to update
       dispatch({
-        type: "UPDATE_PERMISSIONS",
-        payload: await strategy.getPermissions()
+        type: 'UPDATE_PERMISSIONS',
+        payload: await strategy.getPermissions(),
       });
     })();
   }, [dispatch]);
@@ -51,8 +52,8 @@ export function useSyncPermissions() {
       if (!strategy) {
         fixupDisconnection();
         return dispatch({
-          type: "UPDATE_PERMISSIONS",
-          payload: []
+          type: 'UPDATE_PERMISSIONS',
+          payload: [],
         });
       }
 
@@ -60,12 +61,12 @@ export function useSyncPermissions() {
         const permissions = await strategy.getPermissions();
         const hasPermissions = comparePermissions(
           requiredPermissions,
-          permissions
+          permissions,
         );
 
         dispatch({
-          type: "UPDATE_PERMISSIONS",
-          payload: permissions
+          type: 'UPDATE_PERMISSIONS',
+          payload: permissions,
         });
 
         if (requiredPermissions.length === 0 && ensurePermissions) {
@@ -78,7 +79,7 @@ export function useSyncPermissions() {
           await strategy.connect(
             requiredPermissions,
             state.config.appInfo,
-            state.config.gatewayConfig
+            state.config.gatewayConfig,
           );
         }
 
@@ -88,8 +89,8 @@ export function useSyncPermissions() {
       } catch {
         fixupDisconnection();
         dispatch({
-          type: "UPDATE_PERMISSIONS",
-          payload: []
+          type: 'UPDATE_PERMISSIONS',
+          payload: [],
         });
       }
     }
@@ -97,7 +98,7 @@ export function useSyncPermissions() {
     // sync on connection
     async function msgSync(e: MessageEvent<ConnectMsg>) {
       // validate message
-      if (e.data.type !== "connect_result") {
+      if (e.data.type !== 'connect_result') {
         return;
       }
 
@@ -117,7 +118,7 @@ export function useSyncPermissions() {
       }
 
       // signal correct disconnection
-      dispatch({ type: "DISCONNECT" });
+      dispatch({ type: 'DISCONNECT' });
 
       // remove active strategy
       localStorage.removeItem(STRATEGY_STORE);
@@ -127,9 +128,9 @@ export function useSyncPermissions() {
     sync();
 
     // events where we need to sync
-    addEventListener("arweaveWalletLoaded", sync);
-    addEventListener("focus", sync);
-    addEventListener("message", msgSync);
+    addEventListener('arweaveWalletLoaded', sync);
+    addEventListener('focus', sync);
+    addEventListener('message', msgSync);
 
     // add sync on address change if
     // there is an active strategy
@@ -141,9 +142,9 @@ export function useSyncPermissions() {
 
     return () => {
       // remove events
-      removeEventListener("arweaveWalletLoaded", sync);
-      removeEventListener("focus", sync);
-      removeEventListener("message", msgSync);
+      removeEventListener('arweaveWalletLoaded', sync);
+      removeEventListener('focus', sync);
+      removeEventListener('message', msgSync);
 
       // remove sync on address change
       // if there was a listener added

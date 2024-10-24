@@ -1,15 +1,16 @@
-import { ArweaveWalletKit } from "../components/Provider";
-import ConnectButton from "../components/ConnectButton";
-import type { ComponentStory } from "@storybook/react";
+import type { ComponentStory } from '@storybook/react';
+
+import ConnectButton from '../components/ConnectButton';
+import { ArweaveWalletKit } from '../components/Provider';
 
 export default {
-  name: "ConnectButton",
-  component: ConnectButton
+  name: 'ConnectButton',
+  component: ConnectButton,
 };
 
 const Template: ComponentStory<typeof ArweaveWalletKit> = (props) => (
   <ArweaveWalletKit {...props}>
-    <ConnectButton accent={"rgb(0, 122, 255)"} />
+    <ConnectButton accent={'rgb(0, 122, 255)'} />
   </ArweaveWalletKit>
 );
 
@@ -17,33 +18,33 @@ export const Basic = Template.bind({});
 
 Basic.args = {
   theme: {
-    displayTheme: "light",
+    displayTheme: 'light',
     accent: {
       r: 0,
       g: 0,
-      b: 0
+      b: 0,
     },
     titleHighlight: {
       r: 0,
       g: 122,
-      b: 255
+      b: 255,
     },
-    radius: "default",
+    radius: 'default',
     font: {
-      fontFamily: "Manrope"
-    }
+      fontFamily: 'Manrope',
+    },
   },
   config: {
-    permissions: ["ACCESS_ADDRESS", "ACCESS_ALL_ADDRESSES"],
+    permissions: ['ACCESS_ADDRESS', 'ACCESS_ALL_ADDRESSES'],
     ensurePermissions: true,
     appInfo: {
-      name: "Test App",
-      logo: "https://arweave.net/tQUcL4wlNj_NED2VjUGUhfCTJ6pDN9P0e3CbnHo3vUE"
+      name: 'Test App',
+      logo: 'https://arweave.net/tQUcL4wlNj_NED2VjUGUhfCTJ6pDN9P0e3CbnHo3vUE',
     },
     gatewayConfig: {
-      host: "arweave.net",
+      host: 'arweave.net',
       port: 443,
-      protocol: "https"
-    }
-  }
+      protocol: 'https',
+    },
+  },
 };

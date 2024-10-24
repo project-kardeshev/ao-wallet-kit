@@ -1,6 +1,7 @@
-import { DefaultTheme, withTheme } from "../theme";
-import { styled } from "@linaria/react";
-import { rgbToString } from "../utils";
+import { styled } from '@linaria/react';
+
+import { DefaultTheme, withTheme } from '../theme';
+import { rgbToString } from '../utils/arweave';
 
 export const Title = withTheme(styled.h1<{
   small?: boolean;
@@ -9,7 +10,7 @@ export const Title = withTheme(styled.h1<{
 }>`
   display: flex;
   font-family: ${(props) => props.theme.themeConfig.font.fontFamily}, sans-serif;
-  font-size: ${(props) => (props.small ? "1.05rem" : "1.2rem")};
+  font-size: ${(props) => (props.small ? '1.05rem' : '1.2rem')};
   font-weight: 600;
   color: rgb(
     ${(props) => {
@@ -20,7 +21,7 @@ export const Title = withTheme(styled.h1<{
       return rgbToString(props.theme.themeConfig.titleHighlight);
     }}
   );
-  cursor: ${(props) => (props.themed ? "pointer" : "text")};
+  cursor: ${(props) => (props.themed ? 'pointer' : 'text')};
   align-items: center;
   gap: 0.34rem;
   margin: 0;

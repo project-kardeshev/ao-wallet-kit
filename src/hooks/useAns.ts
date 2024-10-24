@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import useAddress from "./active_address";
-import useGatewayURL from "./gateway";
+import { useEffect, useState } from 'react';
+
+import useAddress from './active_address';
+import useGatewayURL from './gateway';
 
 /**
  * ANS profile hook
@@ -18,7 +19,7 @@ export default function useAns() {
 
       try {
         const res = await fetch(
-          `https://ans-stats.decent.land/profile/${address}`
+          `https://ans-stats.decent.land/profile/${address}`,
         );
         const data: AnsProfile = await res.json();
 
@@ -28,12 +29,14 @@ export default function useAns() {
 
         setAns({
           ...data,
-          currentLabel: data.currentLabel + ".ar",
-          avatar: data.avatar ? `${gatewayURL}/${data.avatar}` : undefined
+          currentLabel: data.currentLabel + '.ar',
+          avatar: data.avatar ? `${gatewayURL}/${data.avatar}` : undefined,
         });
       } catch (e: any) {
         console.error(
-          `[Arweave Wallet Kit] Failed to fetch ans profile\n${e?.message || e}`
+          `[Arweave Wallet Kit] Failed to fetch ans profile\n${
+            e?.message || e
+          }`,
         );
       }
     })();

@@ -1,7 +1,7 @@
-import { STRATEGY_STORE } from "../../strategy";
-import useActiveStrategy from "../strategy";
-import useGlobalState from "../global";
-import useConnected from "./connected";
+import { STRATEGY_STORE } from '../../strategy';
+import useGlobalState from '../global';
+import useActiveStrategy from '../strategy';
+import useConnected from './connected';
 
 /**
  * Disconnect method hook
@@ -16,17 +16,17 @@ export default function useDisconnect() {
    */
   async function disconnect() {
     if (!strategy || !connected) {
-      throw new Error("[Arweave Wallet Kit] Not yet connected");
+      throw new Error('[Arweave Wallet Kit] Not yet connected');
     }
 
     try {
       await strategy.disconnect();
 
       localStorage.removeItem(STRATEGY_STORE);
-      dispatch({ type: "DISCONNECT" });
+      dispatch({ type: 'DISCONNECT' });
     } catch (e: any) {
       throw new Error(
-        "[Arweave Wallet Kit] Could not disconnect\n" + (e?.message || e)
+        '[Arweave Wallet Kit] Could not disconnect\n' + (e?.message || e),
       );
     }
   }

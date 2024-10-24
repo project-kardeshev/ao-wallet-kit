@@ -1,6 +1,15 @@
-import { getStrategy } from "../strategy";
-import useGlobalState from "./global";
-import { useEffect, useMemo } from "react";
+import { useMemo } from 'react';
+
+import { getStrategy } from '../strategy';
+import useGlobalState from './global';
+
+export function useStrategies() {
+  // global context
+  const { state } = useGlobalState();
+  const val = useMemo(() => state.strategies, [state]);
+
+  return val;
+}
 
 /**
  * Active strategy (wallet) identifier
@@ -17,8 +26,12 @@ export function useStrategy() {
 export default function useActiveStrategy() {
   // global context
   const activeStrategy = useStrategy();
+  const allStrategies = useStrategies();
 
-  const strategy = useMemo(() => getStrategy(activeStrategy), [activeStrategy]);
+  const strategy = useMemo(
+    () => getStrategy(activeStrategy, allStrategies),
+    [activeStrategy, allStrategies],
+  );
 
   return strategy;
 }
@@ -39,23 +52,22 @@ export function useApi() {
     // from "useConnection"
     const apiObj = strategy;
     const omit = [
-      "name",
-      "description",
-      "theme",
-      "logo",
-      "url",
-      "resumeSession",
-      "isAvailable",
-      "addAddressEvent",
-      "removeAddressEvent",
-      "connect"
+      'name',
+      'description',
+      'theme',
+      'logo',
+      'url',
+      'resumeSession',
+      'isAvailable',
+      'addAddressEvent',
+      'removeAddressEvent',
+      'connect',
     ];
 
     for (const key in strategy) {
       if (!omit.includes(key)) continue;
 
-      // @ts-expect-error
-      delete apiObj[key];
+      delete apiObj[key as keyof typeof apiObj];
     }
 
     return apiObj;

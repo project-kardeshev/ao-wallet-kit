@@ -1,8 +1,9 @@
-import { comparePermissions } from "../../utils";
-import { useEffect, useState } from "react";
-import useActiveStrategy from "../strategy";
-import usePermissions from "../permissions";
-import useGlobalState from "../global";
+import { useEffect, useState } from 'react';
+
+import { comparePermissions } from '../../utils/arweave';
+import useGlobalState from '../global';
+import usePermissions from '../permissions';
+import useActiveStrategy from '../strategy';
 
 export default function useConnected() {
   const [connected, setConnected] = useState(false);

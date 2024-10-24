@@ -1,5 +1,6 @@
-import useGlobalState from "./global";
-import { useMemo } from "react";
+import { useMemo } from 'react';
+
+import useGlobalState from './global';
 
 export default function useGatewayURL() {
   const { state } = useGlobalState();
@@ -8,7 +9,7 @@ export default function useGatewayURL() {
     const gatewayConfig = state?.config?.gatewayConfig;
 
     if (!gatewayConfig) {
-      return "https://arweave.net";
+      return 'https://arweave.net';
     }
 
     return `${gatewayConfig.protocol}://${gatewayConfig.host}:${gatewayConfig.port}`;
