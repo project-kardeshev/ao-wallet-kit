@@ -9,7 +9,7 @@
     "moduleResolution": "node",
     "module": "esnext",
     "alwaysStrict": true,
-    "types": ["node", "DOM"],
+    "types": ["node"],
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
