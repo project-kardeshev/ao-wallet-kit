@@ -50,7 +50,7 @@
     winston "^3.13.0"
     zod "^3.23.8"
 
-"@ardrive/turbo-sdk@^1.19.1":
+"@ardrive/turbo-sdk@^1.17.0", "@ardrive/turbo-sdk@^1.19.1":
   version "1.19.2"
   resolved "https://registry.yarnpkg.com/@ardrive/turbo-sdk/-/turbo-sdk-1.19.2.tgz#6e1cb8f956fd1c5100d344378b556557ff94e582"
   integrity sha512-6ZncZhBPbP72oFqRMhXpREQ9djvQyqUVfEndcbGNdeRTm0vexZv/T8sTXQqxzQPRtjRnA05SvEAjYchZHkqm/g==
