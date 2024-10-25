@@ -1,8 +1,10 @@
-module.exports = {
-stories: [
-  '../src/**/*.stories.@(js|jsx|ts|tsx|mdx)', 
-  '../docs/**/*.stories.@(js|jsx|mjs|ts|tsx|mdx|svelte)', 
-],
+export default {
+  stories: [
+     "../docs/**/*.mdx",
+  "../docs/**/*.stories.@(js|jsx|mjs|ts|tsx|svelte)",
+    "../src/**/*.mdx",
+    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx|svelte)",
+  ],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',

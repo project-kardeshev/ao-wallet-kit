@@ -19,6 +19,7 @@ async function main() {
         DEPLOY_KEY: b64EncodedWallet,
         DEPLOY_ANT_PROCESS_ID: 'wJVTnZTedI9FIY4r2cB9C4CpAJKImvhu0WjOh0AecjQ',
         DEPLOY_DIR: path.join(__dirname, '..', 'storybook-static'),
+        GITHUB_SHA: process.env.GITHUB_SHA ?? 'local',
       },
     },
   );
