@@ -47,7 +47,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "yarn build-docs && storybook build",
     "build-docs": "typedoc",
-    "publish-docs": "yarn build-storybook && permaweb-deploy --ant-process $DEPLOY_ANT_PROCESS_ID --undername ao-wallet-kit --deploy-folder storybook-static",
+    "publish-docs": "node tools/deploy-docs.mjs",
     "serve-docs": "http-server storybook-static --port 8080",
     "test": "echo \"Warning: no test specified\"",
     "format": "prettier . --write",
