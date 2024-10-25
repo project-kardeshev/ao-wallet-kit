@@ -22,7 +22,8 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "jsx": "react-jsx"
   },
   "include": ["src"],
   "exclude": ["node_modules"]

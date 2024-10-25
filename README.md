@@ -1,25 +1,26 @@
-# Arweave Wallet Kit
+# AO Wallet Kit
 
-React Hooks and Components for better interaction with Arweave wallets. Modular, can support any Arweave-based wallet.
-
-> The Arweave Wallet Kit is in BETA. Please report bugs at the issues tab.
+React Hooks and Components for preconfigured and customizable interactions on AO.
 
 ## Supported wallets
 
 - [ArConnect](https://arconnect.io)
 - [Arweave.app](https://arweave.app)
-- Any extension-based Arweave wallet, that injects it's ArConnect-like API into `window.arweaveWallet`
+- [Metamask](https://metamask.io/)
+- [Phantom](https://phantom.app/)
+- Any wallet that injects the `window.ethereum` or `window.arweaveWallet` API (wagmi is used internally)
+- Allows for custom strategies to be implemented so future integrations can be added!
 
 ## Installation
 
 ```sh
-yarn add arweave-wallet-kit
+yarn add @project-kardeshev/ao-wallet-kit
 ```
 
 or
 
 ```sh
-npm i arweave-wallet-kit
+npm i @project-kardeshev/ao-wallet-kit
 ```
 
 ## Setup
@@ -29,9 +30,9 @@ To use the library, you'll need to wrap your application with the Kit Provider.
 ```tsx
 const App = () => {
   return (
-    <ArweaveWalletKit>
+    <AOWalletKit>
       <YourApp />
-    </ArweaveWalletKit>
+    </AOWalletKit>
   );
 };
 ```
@@ -42,7 +43,7 @@ The Arweave Wallet Kit can be configured with information about your application
 
 ```tsx
 ...
-  <ArweaveWalletKit
+  <AOWalletKit
     config={{
       permissions: ["ACCESS_ADDRESS"],
       ensurePermissions: true,
@@ -54,13 +55,13 @@ The Arweave Wallet Kit can be configured with information about your application
     }}
   >
     <YourApp />
-  </ArweaveWalletKit>
+  </AOWalletKit>
 ...
 ```
 
 ### App config
 
-Using the `config` field of the `<ArweaveWalletKit>` provider component, you can define a name, a logo or the required permissions for your app.
+Using the `config` field of the `<AOWalletKit>` provider component, you can define a name, a logo or the required permissions for your app.
 
 #### Available options
 
@@ -93,7 +94,7 @@ Here's an example of how to use it:
 
 ```tsx
 ...
-<ArweaveWalletKit
+<AOWalletKit
   theme={{
     font: {
       fontFamily: "Arial"
@@ -106,11 +107,11 @@ Here's an example of how to use it:
 
 ## Terminology of Arweave Wallet Kit
 
-Arweave Wallet Kit supports several _strategies_. The word **strategy means an implementation of an Arweave Wallet** in the Kit. These strategies allow the user to communicate with all wallets the same way and with the same API.
+Arweave Wallet Kit supports several _strategies_. The word **strategy means an implementation of a Wallet** in the Kit. These strategies allow the user to communicate with all wallets the same way and with the same API.
 
 ## Connect Button
 
-To quickly integrate the Arweave Wallet Kit, you can use the `<ConnectButton>` component. It is a highly customizable button that supports the [ANS](https://ar.page) protocol to display information about the connected wallet.
+To quickly integrate the Arweave Wallet Kit, you can use the `<ConnectButton>` component. It is a highly customizable button that supports displaying profile information about the connected wallet.
 
 ### Usage
 
@@ -132,12 +133,11 @@ You can configure the Connect Button through it's props.
 | `accent`             | `string`  |  A theme color for the button                                                           |
 | `showBalance`        | `boolean` | Show user balance when connected                                                        |
 | `showProfilePicture` | `boolean` | Show user profile picture when connected                                                |
-| `useAns`             | `boolean` | Use ANS to grab profile information                                                     |
 | `profileModal`       | `boolean` | Show profile modal on click (if disabled, clicking the button will disconnect the user) |
 
 ## Hooks
 
-Inside the [`<ArweaveWalletKit>`](#setup), you can use all kinds of hooks that are reactive to the different [strategies](#terminology-of-arweave-wallet-kit). Some of the hooks / api functions might not be supported by all wallets.
+Inside the [`<AOWalletKit>`](#setup), you can use all kinds of hooks that are reactive to the different [strategies](#terminology-of-arweave-wallet-kit). Some of the hooks / api functions might not be supported by all wallets.
 
 ### `useConnection`
 
@@ -198,7 +198,7 @@ const address = useActiveAddress();
 
 ### `usePublicKey`
 
-Active address hook. Requires the `ACCESS_PUBLIC_KEY` permission.
+Active public key hook. Requires the `ACCESS_PUBLIC_KEY` permission.
 
 #### Usage
 
@@ -228,7 +228,7 @@ const addresses = useAddresses();
 
 ### `useWalletNames`
 
-All addresses hook. Returns the addresses in the connected wallet, known by Arweave Wallet Kit. Requires the `ACCESS_ALL_ADDRESSES` permission.
+All addresses hook. Returns the addresses in the connected wallet, known by Arweave Wallet Kit. Requires the `ACCESS_ALL_ADDRESSES` permission. Note this is note available for Ethereum wallets.
 
 #### Usage
 

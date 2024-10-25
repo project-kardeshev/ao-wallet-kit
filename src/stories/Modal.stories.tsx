@@ -6,7 +6,7 @@ import { Footer } from '../components/Modal/Footer';
 import { Head } from '../components/Modal/Head';
 import { Modal } from '../components/Modal/Modal';
 import { Paragraph } from '../components/Paragraph';
-import { ArweaveWalletKit } from '../components/Provider';
+import { AOWalletKit } from '../components/Provider';
 import { Title, TitleWithParagraph } from '../components/Title';
 import useModal from '../hooks/modal';
 
@@ -19,7 +19,7 @@ export const Basic = () => {
   const modal = useModal(true);
 
   return (
-    <ArweaveWalletKit>
+    <AOWalletKit>
       <Modal {...modal.bindings}>
         <Head onClose={modal.bindings.onClose}>
           <Title>Connect wallet</Title>
@@ -42,7 +42,7 @@ export const Basic = () => {
           <Button>MORE</Button>
         </Footer>
       </Modal>
-    </ArweaveWalletKit>
+    </AOWalletKit>
   );
 };
 

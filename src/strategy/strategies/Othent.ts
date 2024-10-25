@@ -38,7 +38,7 @@ export default class OthentStrategy implements Strategy {
     try {
       const appInfo: OthentAppInfo = {
         name: typeof location === 'undefined' ? 'UNKNOWN' : location.hostname,
-        version: 'ArweaveWalletKit',
+        version: 'AOWalletKit',
         env: '',
       };
 
