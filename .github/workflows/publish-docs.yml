@@ -8,11 +8,7 @@ on:
   workflow_dispatch:
   workflow_call:
 jobs:
-  build:
-    uses: ./.github/workflows/build.yml
-    secrets: inherit
   publish:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,6 +16,7 @@ jobs:
         with:
           node-version: 18.x
       - run: yarn --frozen-lockfile
+      - run: yarn build
       - run: yarn publish-docs
         env:
           DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
