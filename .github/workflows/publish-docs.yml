@@ -1,28 +1,18 @@
 name: Production Deploy
 
-concurrency:
-  group: ${{ github.workflow }}
-  cancel-in-progress: true
-
 on:
-  push:
-    branches:
-      - alpha
-      - main
   workflow_dispatch:
   workflow_call:
 jobs:
-  build:
-    uses: ./.github/workflows/build.yml
   publish:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v2
         with:
-          node-version: 20.x
+          node-version: 18.x
       - run: yarn --frozen-lockfile
+      - run: yarn build
       - run: yarn publish-docs
         env:
           DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}

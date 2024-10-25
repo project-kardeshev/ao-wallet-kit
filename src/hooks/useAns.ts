@@ -3,6 +3,26 @@ import { useEffect, useState } from 'react';
 import useAddress from './active_address';
 import useGatewayURL from './gateway';
 
+interface AnsProfile {
+  user: string;
+  currentLabel: string;
+  ownedLabels?: {
+    domain: string;
+    color: string;
+    subdomains: unknown[];
+    record: string | null;
+    created_at: number;
+    label: string;
+  }[];
+  nickname?: string;
+  address_color: string;
+  bio?: string;
+  avatar?: string;
+  links?: {
+    [key: string]: string;
+  };
+}
+
 /**
  * ANS profile hook
  */
@@ -43,24 +63,4 @@ export default function useAns() {
   }, [address, gatewayURL]);
 
   return ans;
-}
-
-interface AnsProfile {
-  user: string;
-  currentLabel: string;
-  ownedLabels?: {
-    domain: string;
-    color: string;
-    subdomains: unknown[];
-    record: string | null;
-    created_at: number;
-    label: string;
-  }[];
-  nickname?: string;
-  address_color: string;
-  bio?: string;
-  avatar?: string;
-  links?: {
-    [key: string]: string;
-  };
 }

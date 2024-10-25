@@ -5,3 +5,9 @@ dist
 coverage
 CODEOWNERS
 docs
+.storybook
+.husky
+CHANGLELOG.md
+LICENSE
+yarn.lock
+storybook-static

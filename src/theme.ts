@@ -83,6 +83,6 @@ export const { ThemeProvider, useTheme } = theming;
 // the components that are outside throw the undefined error
 // naturally on production use, this will never happen, as
 // the users need to wrap their application with the
-// <ArweaveWalletKit> component anyway
+// <AOWalletKit> component anyway
 export const withTheme =
   theming.withTheme || ((val) => val as ThemingType<DefaultTheme>['withTheme']);
