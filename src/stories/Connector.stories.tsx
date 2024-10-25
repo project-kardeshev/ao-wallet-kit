@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Modal } from '../components/Modal/Modal';
-import { ArweaveWalletKit } from '../components/Provider';
+import { AOWalletKit } from '../components/Provider';
 import useAddress from '../hooks/active_address';
 import useAddresses, { useWalletNames } from '../hooks/addresses';
 import useConnection from '../hooks/connection';
@@ -15,7 +15,7 @@ export default {
 
 export const Basic = () => {
   return (
-    <ArweaveWalletKit
+    <AOWalletKit
       config={{
         permissions: [
           'ACCESS_ADDRESS',
@@ -29,7 +29,7 @@ export const Basic = () => {
       }}
     >
       <Button />
-    </ArweaveWalletKit>
+    </AOWalletKit>
   );
 };
 

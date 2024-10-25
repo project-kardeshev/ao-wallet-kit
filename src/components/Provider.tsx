@@ -17,7 +17,7 @@ import Strategy from '../strategy/Strategy';
 import { Font, ThemeProvider, darkTheme, lightTheme } from '../theme';
 import { rgbToString } from '../utils/arweave';
 
-export function ArweaveWalletKit({
+export function AOWalletKit({
   children,
   theme = defaultTheme,
   config = defaultConfig,

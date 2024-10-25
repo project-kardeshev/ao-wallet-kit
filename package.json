@@ -51,7 +51,9 @@
     "serve-docs": "http-server storybook-static --port 8080",
     "test": "echo \"Warning: no test specified\"",
     "format": "prettier . --write",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "docs:update": "markdown-toc-gen insert README.md",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@ar.io/sdk": "^2.3.2",
@@ -117,6 +119,7 @@
     "eslint-plugin-simple-import-sort": "^8.0.0",
     "http-server": "^14.1.1",
     "husky": "^8.0.3",
+    "lint-staged": "^15.2.10",
     "markdown-toc-gen": "^1.0.1",
     "node-stdlib-browser": "^1.2.1",
     "prettier": "^2.8.8",
@@ -138,10 +141,7 @@
     "react-dom": "^16.8.0 || 17.x || 18.x"
   },
   "lint-staged": {
-    "**/*.{ts,js,mjs,cjs,md,json}": [
-      "prettier --write ."
-    ],
-    "**/README.md": [
+    "./README.md": [
       "markdown-toc-gen insert"
     ]
   }
