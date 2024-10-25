@@ -11,7 +11,11 @@ export default defineConfig({
   plugins: [
     react(),
     nodePolyfills(),
-    dts({ insertTypesEntry: true }),
+    dts({
+      insertTypesEntry: true,
+      exclude: ['**/node_modules/**', '**/dist/**'],
+      skipDiagnostics: true, // Skip emitting TypeScript diagnostics
+    }),
     linaria({
       include: ['**/*.{ts,tsx}'],
       babelOptions: {
