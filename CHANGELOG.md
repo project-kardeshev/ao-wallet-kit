@@ -1,4 +1,4 @@
-## [1.0.1](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.0...v1.0.1) (2024-10-25)
+## [1.0.1-alpha.1](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.0...v1.0.1-alpha.1) (2024-10-25)
 
 
 ### Bug Fixes
@@ -7,6 +7,7 @@
 * **action:** remove concurrency from publish ([f20c3d4](https://github.com/project-kardeshev/ao-wallet-kit/commit/f20c3d40069a4efe8f9499bb6eede538bedd6a70))
 * **actions:** update actions to inherits secrets ([2c1017e](https://github.com/project-kardeshev/ao-wallet-kit/commit/2c1017e14e998c8d045bfae5dea45473b18dfda7))
 * **build:** update build config ([12652af](https://github.com/project-kardeshev/ao-wallet-kit/commit/12652af731fe0394b3f5ea812e9f4ab132545fd4))
+* **docs:** add tool for deploying docs ([f8561cd](https://github.com/project-kardeshev/ao-wallet-kit/commit/f8561cde8527787ddfeed48fc96d3e83f454524f))
 * **node v:** bump node version to 20 ([c41545f](https://github.com/project-kardeshev/ao-wallet-kit/commit/c41545fac14f48cc89597a6a01308c802a490e04))
 * **precommit:** update precommit action ([7a654f6](https://github.com/project-kardeshev/ao-wallet-kit/commit/7a654f69da2d46e7ba416cd5d7812ba51f22d033))
 * **prettier:** update lint staged prettier command ([f3de73b](https://github.com/project-kardeshev/ao-wallet-kit/commit/f3de73b589d62b86d09c51af154412e2cace8d9b))

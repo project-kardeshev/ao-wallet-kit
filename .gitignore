@@ -14,6 +14,12 @@ node_modules
 dist
 dist-ssr
 *.local
+# permaweb deploy output garbage
+dist-errors.txt
+dist-id.txt
+dist-manifest.json
+dist-csv.json
+dist-manifest.csv
 
 # Editor directories and files
 .idea
