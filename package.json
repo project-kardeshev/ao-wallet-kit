@@ -52,7 +52,8 @@
     "test": "echo \"Warning: no test specified\"",
     "format": "prettier . --write",
     "lint": "eslint src",
-    "docs:update": "markdown-toc-gen insert README.md"
+    "docs:update": "markdown-toc-gen insert README.md",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@ar.io/sdk": "^2.3.2",
@@ -141,9 +142,9 @@
   },
   "lint-staged": {
     "**/*.{ts,js,mjs,cjs,md,json}": [
-      "prettier --write ."
+      "prettier --write . --ignore-path ./.prettierignore --config ./.prettierrc"
     ],
-    "**/README.md": [
+    "./README.md": [
       "markdown-toc-gen insert"
     ]
   }
