@@ -1,3 +1,11 @@
+## [1.0.2](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.1...v1.0.2) (2024-10-25)
+
+
+### Bug Fixes
+
+* **docs:** add tool for deploying docs ([f8561cd](https://github.com/project-kardeshev/ao-wallet-kit/commit/f8561cde8527787ddfeed48fc96d3e83f454524f))
+* **docs:** update docs config and tooling ([044b400](https://github.com/project-kardeshev/ao-wallet-kit/commit/044b400b2108c05e6c62b50df303fdd41afeab02))
+
 ## [1.0.1-alpha.1](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.0...v1.0.1-alpha.1) (2024-10-25)
 
 
