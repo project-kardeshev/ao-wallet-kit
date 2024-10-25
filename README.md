@@ -2,6 +2,42 @@
 
 React Hooks and Components for preconfigured and customizable interactions on AO.
 
+<!-- toc -->
+
+- [Supported wallets](#supported-wallets)
+- [Installation](#installation)
+- [Setup](#setup)
+- [Config](#config)
+  - [App config](#app-config)
+    - [Available options](#available-options)
+  - [Custom theme](#custom-theme)
+    - [Available options](#available-options-1)
+      - [Font](#font)
+- [Terminology of Arweave Wallet Kit](#terminology-of-arweave-wallet-kit)
+- [Connect Button](#connect-button)
+  - [Usage](#usage)
+  - [Config](#config-1)
+- [Hooks](#hooks)
+  - [`useConnection`](#useconnection)
+    - [Usage](#usage-1)
+  - [`useApi`](#useapi)
+    - [Usage](#usage-2)
+  - [`useProfileModal`](#useprofilemodal)
+  - [`useActiveAddress`](#useactiveaddress)
+    - [Usage](#usage-3)
+  - [`usePublicKey`](#usepublickey)
+    - [Usage](#usage-4)
+  - [`usePermissions`](#usepermissions)
+    - [Usage](#usage-5)
+  - [`useAddresses`](#useaddresses)
+    - [Usage](#usage-6)
+  - [`useWalletNames`](#usewalletnames)
+    - [Usage](#usage-7)
+  - [`useStrategy`](#usestrategy)
+    - [Usage](#usage-8)
+
+<!-- tocstop -->
+
 ## Supported wallets
 
 - [ArConnect](https://arconnect.io)
@@ -15,7 +51,6 @@ React Hooks and Components for preconfigured and customizable interactions on AO
 
 ```sh
 yarn add @project-kardeshev/ao-wallet-kit
-
 ```
 
 or

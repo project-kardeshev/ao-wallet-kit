@@ -10,4 +10,4 @@ docs
 CHANGLELOG.md
 LICENSE
 yarn.lock
-.storybook-static
+storybook-static
