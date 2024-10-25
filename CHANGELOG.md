@@ -1,3 +1,22 @@
+# [1.0.0-alpha.2](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2024-10-25)
+
+
+### Bug Fixes
+
+* **action:** dont use build file in publish docs ([746084a](https://github.com/project-kardeshev/ao-wallet-kit/commit/746084a3bc8ccf59f460de9c371c247552a45aff))
+* **action:** remove concurrency from publish ([f20c3d4](https://github.com/project-kardeshev/ao-wallet-kit/commit/f20c3d40069a4efe8f9499bb6eede538bedd6a70))
+* **actions:** update actions to inherits secrets ([2c1017e](https://github.com/project-kardeshev/ao-wallet-kit/commit/2c1017e14e998c8d045bfae5dea45473b18dfda7))
+* **build:** update build config ([12652af](https://github.com/project-kardeshev/ao-wallet-kit/commit/12652af731fe0394b3f5ea812e9f4ab132545fd4))
+* **node v:** bump node version to 20 ([c41545f](https://github.com/project-kardeshev/ao-wallet-kit/commit/c41545fac14f48cc89597a6a01308c802a490e04))
+* **precommit:** update precommit action ([7a654f6](https://github.com/project-kardeshev/ao-wallet-kit/commit/7a654f69da2d46e7ba416cd5d7812ba51f22d033))
+* **prettier:** update lint staged prettier command ([f3de73b](https://github.com/project-kardeshev/ao-wallet-kit/commit/f3de73b589d62b86d09c51af154412e2cace8d9b))
+* **provider:** rename provider ([6593245](https://github.com/project-kardeshev/ao-wallet-kit/commit/6593245451ae96a5c8f6d561725f7a9170796976))
+* **publish:** add permaweb deploy ([9cd4017](https://github.com/project-kardeshev/ao-wallet-kit/commit/9cd4017bf34aebf3398cdb4f7ed51b959318c903))
+* **publish:** add permaweb deploy ([dbbc9e9](https://github.com/project-kardeshev/ao-wallet-kit/commit/dbbc9e95e4dfe4e978f67b2ec99706224be7bc67))
+* **storybook:** fix storybook build ([c23ffaf](https://github.com/project-kardeshev/ao-wallet-kit/commit/c23ffaf14d130cebe26bdad59ec632199fd9a481))
+* **tsconfig:** no emit ([6094fee](https://github.com/project-kardeshev/ao-wallet-kit/commit/6094fee108b2d04aa27728484f061a028a70318b))
+* **types:** remove DOM from tsconfig types ([9577dd7](https://github.com/project-kardeshev/ao-wallet-kit/commit/9577dd76bc68431c139bc132f95fac31e37ec2bd))
+
 # 1.0.0-alpha.1 (2024-10-24)
 
 
