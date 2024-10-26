@@ -1,12 +1,12 @@
-import type { PermissionType } from 'arconnect';
+import { PermissionType } from 'arconnect';
 
 import { comparePermissions } from '../utils/arweave';
-import Strategy from './Strategy';
-import ArConnectStrategy from './strategies/ArConnect';
-import ArweaveWebWalletStrategy from './strategies/ArweaveWebWallet';
-import BrowserWalletStrategy from './strategies/BrowserWallet';
+import { Strategy } from './Strategy';
+import { ArConnectStrategy } from './strategies/ArConnect';
+import { ArweaveWebWalletStrategy } from './strategies/ArweaveWebWallet';
+import { BrowserWalletStrategy } from './strategies/BrowserWallet';
 import { ethereumStrategy, weaveVmStrategy } from './strategies/Ethereum';
-import OthentStrategy from './strategies/Othent';
+import { OthentStrategy } from './strategies/Othent';
 
 export const STRATEGY_STORE = 'wallet_kit_strategy_id';
 

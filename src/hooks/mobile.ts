@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 /**
  * Hook to determinate mobile viewport
  */
-export default function useMobile(mobileWidth = 720) {
+export function useMobile(mobileWidth = 720) {
   const [mobile, setMobile] = useState(false);
   const query = useMemo(() => {
     if (typeof window === 'undefined') return null;

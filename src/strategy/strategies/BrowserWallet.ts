@@ -1,21 +1,21 @@
-import type {
+import {
   AppInfo,
   DataItem,
   DispatchResult,
   GatewayConfig,
   PermissionType,
 } from 'arconnect';
-import type { SignatureOptions } from 'arweave/node/lib/crypto/crypto-interface';
-import type Transaction from 'arweave/node/lib/transaction';
+import { SignatureOptions } from 'arweave/node/lib/crypto/crypto-interface';
+import Transaction from 'arweave/node/lib/transaction';
 
 import { callWindowApi } from '../../utils/arweave';
-import type Strategy from '../Strategy';
+import { Strategy } from '../Strategy';
 
 /**
  * Any kind of browser wallet, with an
  * ArConnect-like injected API
  */
-export default class BrowserWalletStrategy implements Strategy {
+export class BrowserWalletStrategy implements Strategy {
   public id: 'browserwallet' = 'browserwallet';
   public name = 'Browser Wallet';
   public description = 'Any browser wallet with an injected API';
