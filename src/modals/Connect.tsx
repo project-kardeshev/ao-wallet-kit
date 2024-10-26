@@ -9,14 +9,14 @@ import { Footer } from '../components/Modal/Footer';
 import { Head } from '../components/Modal/Head';
 import { Modal } from '../components/Modal/Modal';
 import { Paragraph } from '../components/Paragraph';
-import type { Radius } from '../components/Provider';
+import { Radius } from '../components/Provider';
 import { Title, TitleWithParagraph } from '../components/Title';
-import useConnection from '../hooks/connection';
-import useGatewayURL from '../hooks/gateway';
-import useGlobalState from '../hooks/global';
-import useModal from '../hooks/modal';
+import { useConnection } from '../hooks/connection';
+import { useGatewayURL } from '../hooks/gateway';
+import { useGlobalState } from '../hooks/global';
+import { useModal } from '../hooks/modal';
 import { getStrategy, saveStrategy } from '../strategy';
-import type Strategy from '../strategy/Strategy';
+import { Strategy } from '../strategy/Strategy';
 import { DefaultTheme, withTheme } from '../theme';
 
 export function ConnectModal() {

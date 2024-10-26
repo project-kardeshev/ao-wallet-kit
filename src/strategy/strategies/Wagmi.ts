@@ -10,7 +10,7 @@ import {
   createWagmiDataItemSigner,
   getEthersSigner,
 } from '../../utils/ethereum';
-import Strategy from '../Strategy';
+import { Strategy } from '../Strategy';
 
 export type WagmiStrategyOptions = {
   id: string;
@@ -21,7 +21,7 @@ export type WagmiStrategyOptions = {
   wagmiConfig: WagmiConfig;
 };
 
-export default class WagmiStrategy implements Strategy {
+export class WagmiStrategy implements Strategy {
   public id: string;
   public name: string;
   public description: string;

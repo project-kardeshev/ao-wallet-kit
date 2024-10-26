@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 
-import useGlobalState from './global';
+import { useGlobalState } from './global';
 
-export default function useGatewayURL() {
+export function useGatewayURL() {
   const { state } = useGlobalState();
 
   const url = useMemo(() => {

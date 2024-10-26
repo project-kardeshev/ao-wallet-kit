@@ -1,19 +1,19 @@
 import { Othent, AppInfo as OthentAppInfo, OthentOptions } from '@othent/kms';
-import type {
+import {
   DataItem,
   DispatchResult,
   GatewayConfig,
   PermissionType,
 } from 'arconnect';
-import type { AppInfo } from 'arweave-wallet-connector';
-import type { SignatureOptions } from 'arweave/node/lib/crypto/crypto-interface';
-import type Transaction from 'arweave/web/lib/transaction';
+import { AppInfo } from 'arweave-wallet-connector';
+import { SignatureOptions } from 'arweave/node/lib/crypto/crypto-interface';
+import Transaction from 'arweave/web/lib/transaction';
 
-import type Strategy from '../Strategy';
+import { Strategy } from '../Strategy';
 
 type ListenerFunction = (address: string) => void;
 
-export default class OthentStrategy implements Strategy {
+export class OthentStrategy implements Strategy {
   id: 'othent' = 'othent';
   name = 'Othent';
   description =

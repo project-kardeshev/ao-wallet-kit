@@ -1,14 +1,14 @@
-import type {
+import {
   AppInfo,
   DataItem,
   DispatchResult,
   GatewayConfig,
   PermissionType,
 } from 'arconnect';
-import type { SignatureOptions } from 'arweave/node/lib/crypto/crypto-interface';
-import type Transaction from 'arweave/node/lib/transaction';
+import { SignatureOptions } from 'arweave/node/lib/crypto/crypto-interface';
+import Transaction from 'arweave/node/lib/transaction';
 
-export default abstract class Strategy {
+export abstract class Strategy {
   // info
   public abstract id: string;
   public abstract name: string;

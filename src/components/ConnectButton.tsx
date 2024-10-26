@@ -1,18 +1,18 @@
 import { ChevronDownIcon, UserIcon } from '@iconicicons/react';
 import { styled } from '@linaria/react';
-import type { HTMLProps } from 'react';
+import { HTMLProps } from 'react';
 
-import useAddress from '../hooks/active_address';
-import useBalance from '../hooks/balance';
-import useConnection from '../hooks/connection';
-import useProfileModal from '../hooks/profile';
-import useAns from '../hooks/useAns';
+import { useAddress } from '../hooks/active_address';
+import { useBalance } from '../hooks/balance';
+import { useConnection } from '../hooks/connection';
+import { useProfileModal } from '../hooks/profile';
+import { useAns } from '../hooks/useAns';
 import { DefaultTheme, withTheme } from '../theme';
 import { formatAddress } from '../utils/arweave';
 import { Button } from './Button';
-import type { Radius } from './Provider';
+import { Radius } from './Provider';
 
-export default function ConnectButton({
+export function ConnectButton({
   accent,
   showBalance = true,
   showProfilePicture = true,

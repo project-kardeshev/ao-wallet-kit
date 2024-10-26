@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 
-import useGlobalState from './global';
-import useActiveStrategy from './strategy';
+import { useGlobalState } from './global';
+import { useActiveStrategy } from './strategy';
 
 /**
  * Active address in the wallet
  */
-export default function useAddress() {
+export function useAddress() {
   // global context
   const { state } = useGlobalState();
 

@@ -1,10 +1,10 @@
-import useGlobalState from '../global';
-import useConnected from './connected';
+import { useGlobalState } from '../global';
+import { useConnected } from './connected';
 
 /**
  * Connect method hook
  */
-export default function useConnect() {
+export function useConnect() {
   const { dispatch } = useGlobalState();
   const connected = useConnected();
 

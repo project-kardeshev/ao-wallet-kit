@@ -1,12 +1,12 @@
 import { STRATEGY_STORE } from '../../strategy';
-import useGlobalState from '../global';
-import useActiveStrategy from '../strategy';
-import useConnected from './connected';
+import { useGlobalState } from '../global';
+import { useActiveStrategy } from '../strategy';
+import { useConnected } from './connected';
 
 /**
  * Disconnect method hook
  */
-export default function useDisconnect() {
+export function useDisconnect() {
   const strategy = useActiveStrategy();
   const { dispatch } = useGlobalState();
   const connected = useConnected();

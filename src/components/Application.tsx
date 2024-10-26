@@ -1,10 +1,10 @@
 import { styled } from '@linaria/react';
-import type { MouseEventHandler } from 'react';
+import { MouseEventHandler } from 'react';
 
 import { DefaultTheme, withTheme } from '../theme';
 import { Button } from './Button';
 import { Paragraph } from './Paragraph';
-import type { Radius } from './Provider';
+import { Radius } from './Provider';
 import { Title } from './Title';
 
 export function Application({

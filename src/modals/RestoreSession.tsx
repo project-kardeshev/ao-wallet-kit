@@ -1,18 +1,18 @@
 import { styled } from '@linaria/react';
-import type { Variants } from 'framer-motion';
+import { Variants } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 import { Button } from '../components/Button';
 import { Modal } from '../components/Modal/Modal';
-import type { Radius } from '../components/Provider';
-import useGlobalState from '../hooks/global';
-import useModal from '../hooks/modal';
+import { Radius } from '../components/Provider';
+import { useGlobalState } from '../hooks/global';
+import { useModal } from '../hooks/modal';
 import { STRATEGY_STORE, syncStrategies } from '../strategy';
 import strategies from '../strategy';
-import type Strategy from '../strategy/Strategy';
+import { Strategy } from '../strategy/Strategy';
 import { DefaultTheme, withTheme } from '../theme';
 
-export default function RestoreSession() {
+export function RestoreSession() {
   // modal controlls and statuses
   const modalController = useModal();
   const { state, dispatch } = useGlobalState();

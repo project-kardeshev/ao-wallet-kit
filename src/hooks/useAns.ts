@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import useAddress from './active_address';
-import useGatewayURL from './gateway';
+import { useAddress } from './active_address';
+import { useGatewayURL } from './gateway';
 
 interface AnsProfile {
   user: string;
@@ -26,7 +26,7 @@ interface AnsProfile {
 /**
  * ANS profile hook
  */
-export default function useAns() {
+export function useAns() {
   const [ans, setAns] = useState<AnsProfile>();
   const address = useAddress();
   const gatewayURL = useGatewayURL();

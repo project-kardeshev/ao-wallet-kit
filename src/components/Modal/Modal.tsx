@@ -7,10 +7,10 @@ import {
   Variants,
   motion,
 } from 'framer-motion';
-import type { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
 import { version } from '../../../package.json';
-import useMobile from '../../hooks/mobile';
+import { useMobile } from '../../hooks/mobile';
 import { DefaultTheme, Radius, withTheme } from '../../theme';
 
 export function Modal({

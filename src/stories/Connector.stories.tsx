@@ -4,7 +4,7 @@ import { Modal } from '../components/Modal/Modal';
 import { AOWalletKit } from '../components/Provider';
 import useAddress from '../hooks/active_address';
 import useAddresses, { useWalletNames } from '../hooks/addresses';
-import useConnection from '../hooks/connection';
+import { useConnection } from '../hooks/connection';
 import useProfileModal from '../hooks/profile';
 import { useApi } from '../hooks/strategy';
 
