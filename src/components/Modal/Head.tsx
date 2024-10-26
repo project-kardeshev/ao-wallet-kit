@@ -1,6 +1,6 @@
 import { CloseIcon } from '@iconicicons/react';
 import { styled } from '@linaria/react';
-import type { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
 import { DefaultTheme, withTheme } from '../../theme';
 

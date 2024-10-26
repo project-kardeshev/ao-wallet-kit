@@ -1,6 +1,6 @@
 import { Dispatch, createContext } from 'react';
 
-import type { Actions, GlobalState } from './faces';
+import { Actions, GlobalState } from './faces';
 
 export const defaultState: GlobalState = {
   activeModal: false,
@@ -12,9 +12,7 @@ export const defaultState: GlobalState = {
   strategies: [],
 };
 
-const context = createContext<{
+export const context = createContext<{
   state: GlobalState;
   dispatch: Dispatch<Actions>;
 }>(undefined as any);
-
-export default context;

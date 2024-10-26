@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-import useGlobalState from './global';
+import { useGlobalState } from './global';
 
-export default function useProfileModal() {
+export function useProfileModal() {
   // global context
   const { state, dispatch } = useGlobalState();
 

@@ -1,7 +1,7 @@
-import type { Actions, GlobalState } from './faces';
+import { Actions, GlobalState } from './faces';
 import { defaultState } from './index';
 
-export default function reducer(
+export function reducer(
   state: GlobalState = defaultState,
   action: Actions,
 ): GlobalState {

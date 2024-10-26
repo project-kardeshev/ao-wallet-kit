@@ -20,6 +20,7 @@ export default defineConfig({
       include: ['**/*.{ts,tsx}'],
       babelOptions: {
         presets: ['@babel/preset-typescript', '@babel/preset-react'],
+        plugins: ['@babel/plugin-transform-modules-commonjs'],
       },
     }),
     cssInjectedByJsPlugin(),
@@ -30,8 +31,8 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'),
-      name: 'arweave-wallet-kit',
+      entry: path.resolve(__dirname, 'src'),
+      name: 'ao-wallet-kit',
       formats: ['es', 'umd'],
       fileName: (format) => `index.${format}.js`,
     },

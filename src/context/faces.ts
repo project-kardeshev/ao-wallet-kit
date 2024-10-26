@@ -1,6 +1,6 @@
-import type { AppInfo, GatewayConfig, PermissionType } from 'arconnect';
+import { AppInfo, GatewayConfig, PermissionType } from 'arconnect';
 
-import Strategy from '../strategy/Strategy';
+import { Strategy } from '../strategy/Strategy';
 
 /** Basic action */
 export interface Action {

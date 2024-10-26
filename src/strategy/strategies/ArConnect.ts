@@ -1,10 +1,10 @@
-import type { DataItem } from 'arconnect';
+import { DataItem } from 'arconnect';
 
 import { callWindowApi } from '../../utils/arweave';
-import type Strategy from '../Strategy';
-import BrowserWalletStrategy from './BrowserWallet';
+import { Strategy } from '../Strategy';
+import { BrowserWalletStrategy } from './BrowserWallet';
 
-export default class ArConnectStrategy
+export class ArConnectStrategy
   extends BrowserWalletStrategy
   implements Strategy
 {

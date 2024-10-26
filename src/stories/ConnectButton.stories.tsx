@@ -1,6 +1,6 @@
-import type { ComponentStory } from '@storybook/react';
+import { ComponentStory } from '@storybook/react';
 
-import ConnectButton from '../components/ConnectButton';
+import { ConnectButton } from '../components/ConnectButton';
 import { AOWalletKit } from '../components/Provider';
 
 export default {
