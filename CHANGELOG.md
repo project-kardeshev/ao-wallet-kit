@@ -1,3 +1,11 @@
+## [1.0.2-alpha.2](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.2-alpha.1...v1.0.2-alpha.2) (2024-10-28)
+
+
+### Bug Fixes
+
+* **ao-sdk:** bump ao-sdk ([f6df62f](https://github.com/project-kardeshev/ao-wallet-kit/commit/f6df62fd32e58223145665230d731c745f060349))
+* **lint:** array deps ([2660306](https://github.com/project-kardeshev/ao-wallet-kit/commit/26603066d9c12c1a59147b8a88448564a4f7db8c))
+
 ## [1.0.2-alpha.1](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.1...v1.0.2-alpha.1) (2024-10-26)
 
 ### Bug Fixes
