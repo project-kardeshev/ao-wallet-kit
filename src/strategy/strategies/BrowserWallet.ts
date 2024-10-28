@@ -1,3 +1,4 @@
+import { AoSigner, createAoSigner } from '@project-kardeshev/ao-sdk';
 import {
   AppInfo,
   DataItem,
@@ -159,5 +160,9 @@ export class BrowserWalletStrategy implements Strategy {
     listener: (e: CustomEvent<{ address: string }>) => void,
   ) {
     removeEventListener('walletSwitch', listener);
+  }
+
+  public async createDataItemSigner(): Promise<AoSigner> {
+    return createAoSigner(window.arweaveWallet as Window['arweaveWallet']);
   }
 }

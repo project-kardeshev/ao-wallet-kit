@@ -1,4 +1,5 @@
 import { Othent, AppInfo as OthentAppInfo, OthentOptions } from '@othent/kms';
+import { AoSigner } from '@project-kardeshev/ao-sdk';
 import {
   DataItem,
   DispatchResult,
@@ -214,5 +215,8 @@ export class OthentStrategy implements Strategy {
       this.#addressListeners.indexOf(listener as any),
       1,
     );
+  }
+  public async createDataItemSigner(): Promise<AoSigner> {
+    throw new Error('Not available on Othent strategy');
   }
 }

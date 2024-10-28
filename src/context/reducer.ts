@@ -5,6 +5,8 @@ export function reducer(
   state: GlobalState = defaultState,
   action: Actions,
 ): GlobalState {
+  console.log('Action:', action);
+  console.log('State:', state);
   switch (action.type) {
     case 'OPEN_MODAL':
       return {

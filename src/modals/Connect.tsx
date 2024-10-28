@@ -27,13 +27,13 @@ export function ConnectModal() {
 
   useEffect(() => {
     modalController.setOpen(state?.activeModal === 'connect');
-  }, [state?.activeModal]);
+  }, [state?.activeModal, modalController]);
 
   useEffect(() => {
     if (modalController.open) return;
     setSelectedStrategy(undefined);
     dispatch({ type: 'CLOSE_MODAL' });
-  }, [modalController.open]);
+  }, [modalController.open, dispatch]);
 
   // connection
   const { connected } = useConnection();
@@ -42,7 +42,7 @@ export function ConnectModal() {
   useEffect(() => {
     if (!connected || state?.activeModal !== 'connect') return;
     dispatch({ type: 'CLOSE_MODAL' });
-  }, [connected, state]);
+  }, [connected, state, dispatch]);
 
   // selected strategy
   const [selectedStrategy, setSelectedStrategy] = useState<string>();
@@ -105,7 +105,6 @@ export function ConnectModal() {
         state.config.appInfo,
         state.config.gatewayConfig,
       );
-
       // send success message
       postMessage({
         type: 'connect_result',
@@ -121,13 +120,14 @@ export function ConnectModal() {
         type: 'UPDATE_STRATEGY',
         payload: s.id,
       });
-    } catch {
+    } catch (e) {
       fixupArConnectModal();
       setRetry(true);
       dispatch({
         type: 'UPDATE_STRATEGY',
         payload: false,
       });
+      console.error(e);
     }
 
     setConnecting(false);

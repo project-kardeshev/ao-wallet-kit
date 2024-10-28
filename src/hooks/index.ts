@@ -1,4 +1,3 @@
-export * from './useAns';
 export * from './strategy';
 export * from './profile';
 export * from './permissions';
@@ -11,3 +10,4 @@ export * from './balance';
 export * from './addresses';
 export * from './active_address';
 export * from './connection';
+export * from './ao_signer';

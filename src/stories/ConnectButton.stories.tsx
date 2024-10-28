@@ -9,9 +9,15 @@ export default {
 };
 
 const Template: ComponentStory<typeof AOWalletKit> = (props) => (
-  <AOWalletKit {...props}>
-    <ConnectButton accent={'rgb(0, 122, 255)'} />
-  </AOWalletKit>
+  <div
+    style={{
+      height: '30vh',
+    }}
+  >
+    <AOWalletKit {...props}>
+      <ConnectButton accent={'rgb(0, 122, 255)'} />
+    </AOWalletKit>
+  </div>
 );
 
 export const Basic = Template.bind({});

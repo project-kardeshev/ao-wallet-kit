@@ -1,3 +1,4 @@
+import { AoSigner } from '@project-kardeshev/ao-sdk';
 import { connect, disconnect, getAccount } from '@wagmi/core';
 import { DataItem, DispatchResult, PermissionType } from 'arconnect';
 import { SignatureOptions } from 'arweave/node/lib/crypto/crypto-interface';
@@ -8,6 +9,7 @@ import { injected } from 'wagmi/connectors';
 
 import {
   createWagmiDataItemSigner,
+  getEthersPublicKeyFromClient,
   getEthersSigner,
 } from '../../utils/ethereum';
 import { Strategy } from '../Strategy';
@@ -27,7 +29,7 @@ export class WagmiStrategy implements Strategy {
   public description: string;
   public theme: string; // Customize as needed
   public logo: string; // arweave tx id of the logo
-  private config: WagmiConfig;
+  public config: WagmiConfig;
   public signer: ethers.Signer | null = null;
   public account: string | null = null;
   private unsubscribeAccount: null | (() => void) = null;
@@ -54,17 +56,25 @@ export class WagmiStrategy implements Strategy {
   private setupListeners() {
     // Subscribe to account changes
     this.unsubscribeAccount = this.config.subscribe(
-      (state) => state.current,
+      (state) => state,
       (current) => {
-        this.account = current ?? null;
+        console.log('Account state:', current);
+        let newAccount: null | `0x${string}` = null;
+        if (current.current) {
+          newAccount =
+            current.connections.get(current.current)?.accounts[0] ?? null;
+        }
+        this.account = newAccount;
         console.log('Account changed:', this.account);
 
         // Update signer when account changes
         if (this.account) {
-          getEthersSigner(this.config).then((signer) => {
-            this.signer = signer;
-            console.log('Signer updated:', this.signer);
-          });
+          getEthersSigner(this.config)
+            .then((signer) => {
+              this.signer = signer;
+              console.log('Signer updated:', this.signer);
+            })
+            .catch(console.error);
         } else {
           this.signer = null;
         }
@@ -106,6 +116,15 @@ export class WagmiStrategy implements Strategy {
     }
   }
 
+  public async resumeSession(): Promise<void> {
+    try {
+      await this.connect();
+      console.log('Resumed session.');
+    } catch (error) {
+      console.error(`[Ethereum Wallet Kit] Error resuming session:`, error);
+    }
+  }
+
   public async disconnect(): Promise<void> {
     try {
       await disconnect(this.config);
@@ -119,6 +138,10 @@ export class WagmiStrategy implements Strategy {
 
   public async getActiveAddress(): Promise<string> {
     return this.account ?? '';
+  }
+
+  public async getActivePublicKey(): Promise<string> {
+    return getEthersPublicKeyFromClient(this.config);
   }
 
   public async getAllAddresses(): Promise<string[]> {
@@ -190,7 +213,18 @@ export class WagmiStrategy implements Strategy {
     );
   }
   public async getPermissions(): Promise<PermissionType[]> {
-    return [] as PermissionType[];
+    return [
+      'ACCESS_ADDRESS',
+      'ACCESS_PUBLIC_KEY',
+      'ACCESS_ALL_ADDRESSES',
+      'SIGN_TRANSACTION',
+      'ENCRYPT',
+      'DECRYPT',
+      'SIGNATURE',
+      'ACCESS_ARWEAVE_CONFIG',
+      'DISPATCH',
+      'ACCESS_TOKENS',
+    ] as PermissionType[];
   }
   public async dispatch(transaction: Transaction): Promise<DispatchResult> {
     throw new Error('Method not available on ethereum wallets.');
@@ -208,5 +242,8 @@ export class WagmiStrategy implements Strategy {
   }
   public async getWalletNames(): Promise<{ [addr: string]: string }> {
     throw new Error('Method not available on ethereum wallets.');
+  }
+  public async createDataItemSigner(): Promise<AoSigner> {
+    return createWagmiDataItemSigner(this.config);
   }
 }

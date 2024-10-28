@@ -100,7 +100,7 @@ export function createBrowserEthereumDataItemSigner(
       target,
       anchor: Math.round(Date.now() / 1000)
         .toString()
-        .padStart(43, Math.floor(Math.random() * 10).toString()),
+        .padStart(32, Math.floor(Math.random() * 10).toString()),
     });
 
     const res = await dataItem.sign(ethSigner).then(async () => ({

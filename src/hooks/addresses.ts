@@ -51,7 +51,6 @@ export function useAddresses() {
 export function useWalletNames() {
   const [names, setNames] = useState<{ [addr: string]: string }>({});
   const addresses = useAddresses();
-  const { state } = useGlobalState();
   const strategy = useActiveStrategy();
 
   useEffect(() => {
@@ -72,7 +71,7 @@ export function useWalletNames() {
         );
       }
     })();
-  }, [addresses, state?.activeStrategy]);
+  }, [addresses, strategy]);
 
   return names;
 }

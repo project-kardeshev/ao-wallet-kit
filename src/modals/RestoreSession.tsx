@@ -48,7 +48,12 @@ export function RestoreSession() {
         });
       }
     })();
-  }, []);
+  }, [
+    state?.config.permissions,
+    state?.config.ensurePermissions,
+    dispatch,
+    modalController,
+  ]);
 
   // remove previous session data
   function clearSession() {
@@ -141,7 +146,6 @@ const BottomModal = withTheme(styled(Modal as any)<any>`
   display: flex;
   align-items: center;
   gap: 1.24rem;
-  padding: 0.75rem 1rem;
   border-radius: ${(props) =>
     radius[props.theme.themeConfig.radius as Radius] + 'px'};
   border-radius: 15px;
@@ -160,6 +164,7 @@ const BottomModal = withTheme(styled(Modal as any)<any>`
 const Text = withTheme(styled.p<{ theme: DefaultTheme }>`
   font-size: 1.05rem;
   font-weight: 500;
+  padding: 10px 20px;
   color: rgb(${(props) => props.theme.primaryText});
   margin: 0px;
 `);
@@ -167,6 +172,7 @@ const Text = withTheme(styled.p<{ theme: DefaultTheme }>`
 const Buttons = styled.div`
   display: flex;
   align-items: center;
+  padding: 10px 20px;
   gap: 0.6rem;
 
   @media screen and (max-width: 720px) {

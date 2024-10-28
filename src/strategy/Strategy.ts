@@ -1,3 +1,4 @@
+import { AoSigner } from '@project-kardeshev/ao-sdk';
 import {
   AppInfo,
   DataItem,
@@ -66,4 +67,5 @@ export abstract class Strategy {
     listener: (e: CustomEvent<{ address: string }>) => void,
   ): void;
   public abstract signDataItem(p: DataItem): Promise<ArrayBuffer>;
+  public abstract createDataItemSigner(): Promise<AoSigner>;
 }

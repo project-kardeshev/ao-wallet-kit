@@ -6,7 +6,6 @@ import { useAddress } from '../hooks/active_address';
 import { useBalance } from '../hooks/balance';
 import { useConnection } from '../hooks/connection';
 import { useProfileModal } from '../hooks/profile';
-import { useAns } from '../hooks/useAns';
 import { DefaultTheme, withTheme } from '../theme';
 import { formatAddress } from '../utils/arweave';
 import { Button } from './Button';
@@ -17,7 +16,6 @@ export function ConnectButton({
   showBalance = true,
   showProfilePicture = true,
   onClick,
-  useAns: ansOption = true,
   profileModal: showProfileModal = true,
   ...props
 }: HTMLProps<HTMLButtonElement> & Props) {
@@ -29,9 +27,6 @@ export function ConnectButton({
 
   // balance
   const balance = useBalance();
-
-  // ans profile
-  const ans = useAns();
 
   // profile modal
   const profileModal = useProfileModal();
@@ -58,18 +53,12 @@ export function ConnectButton({
           )}
           <ProfileSection showBalance={showBalance}>
             {showProfilePicture && (
-              <>
-                {(ans?.avatar && ansOption && (
-                  <Avatar src={ans?.avatar} draggable={false} />
-                )) || (
-                  <AvatarPlaceholder>
-                    <AvatarIcon />
-                  </AvatarPlaceholder>
-                )}
-              </>
+              <AvatarPlaceholder>
+                <AvatarIcon />
+              </AvatarPlaceholder>
             )}
-            {(ansOption && ans?.currentLabel) ||
-              formatAddress(address || '', 5)}
+
+            {formatAddress(address || '', 5)}
             <ExpandIcon />
           </ProfileSection>
         </>
@@ -130,15 +119,6 @@ const avatarRadius: Record<Radius, string> = {
   none: '0px',
 };
 
-const Avatar = withTheme(styled.img<{ theme: DefaultTheme }>`
-  user-select: none;
-  border-radius: ${(props) => avatarRadius[props.theme.themeConfig.radius]};
-  object-fit: cover;
-  width: 1.7rem;
-  height: 1.7rem;
-  margin-right: 0.4rem;
-`);
-
 const AvatarIcon = styled(UserIcon)`
   font-size: 1rem !important;
   color: #fff;
@@ -165,6 +145,5 @@ interface Props {
   accent?: string;
   showBalance?: boolean;
   showProfilePicture?: boolean;
-  useAns?: boolean;
   profileModal?: boolean;
 }

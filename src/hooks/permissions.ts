@@ -34,7 +34,7 @@ export function usePermissions(): PermissionType[] {
         payload: await strategy.getPermissions(),
       });
     })();
-  }, [dispatch]);
+  }, [dispatch, strategy]);
 
   return state.givenPermissions;
 }
@@ -152,5 +152,14 @@ export function useSyncPermissions() {
         strategy.removeAddressEvent(addressChangeSync);
       }
     };
-  }, [strategy, requiredPermissions, dispatch]);
+  }, [
+    strategy,
+    dispatch,
+    ensurePermissions,
+    requiredPermissions,
+    state.activeAddress,
+    state.activeStrategy,
+    state.config.appInfo,
+    state.config.gatewayConfig,
+  ]);
 }
