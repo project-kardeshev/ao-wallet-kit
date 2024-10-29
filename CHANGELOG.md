@@ -1,3 +1,11 @@
+## [1.0.2-alpha.3](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.2-alpha.2...v1.0.2-alpha.3) (2024-10-29)
+
+
+### Bug Fixes
+
+* **lock:** update lock file ([9eacea4](https://github.com/project-kardeshev/ao-wallet-kit/commit/9eacea4e763be5da50901a93f261118bffdecd1a))
+* **pin sdk:** pin ao-sdk ([a145e82](https://github.com/project-kardeshev/ao-wallet-kit/commit/a145e8209f3db40ff73923869208d9d4d4e4bb81))
+
 ## [1.0.2-alpha.2](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.2-alpha.1...v1.0.2-alpha.2) (2024-10-28)
 
 
