@@ -1,3 +1,10 @@
+## [1.0.2-alpha.4](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.2-alpha.3...v1.0.2-alpha.4) (2024-10-29)
+
+
+### Bug Fixes
+
+* **imports:** fix broken bullshit ([998255d](https://github.com/project-kardeshev/ao-wallet-kit/commit/998255d3060626c9a0de948b96f918dad27cdcc1))
+
 ## [1.0.2-alpha.3](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.2-alpha.2...v1.0.2-alpha.3) (2024-10-29)
 
 
