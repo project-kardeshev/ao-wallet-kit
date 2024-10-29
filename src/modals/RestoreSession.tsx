@@ -48,12 +48,7 @@ export function RestoreSession() {
         });
       }
     })();
-  }, [
-    state?.config.permissions,
-    state?.config.ensurePermissions,
-    dispatch,
-    modalController,
-  ]);
+  }, []);
 
   // remove previous session data
   function clearSession() {
