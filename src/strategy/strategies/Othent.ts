@@ -1,5 +1,5 @@
 import { Othent, AppInfo as OthentAppInfo, OthentOptions } from '@othent/kms';
-import { AoSigner } from '@project-kardeshev/ao-sdk';
+import { AoSigner } from '@project-kardeshev/ao-sdk/web';
 import {
   DataItem,
   DispatchResult,

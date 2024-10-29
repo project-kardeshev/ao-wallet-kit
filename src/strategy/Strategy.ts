@@ -1,4 +1,4 @@
-import { AoSigner } from '@project-kardeshev/ao-sdk';
+import { AoSigner } from '@project-kardeshev/ao-sdk/web';
 import {
   AppInfo,
   DataItem,

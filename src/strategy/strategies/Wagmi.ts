@@ -1,4 +1,4 @@
-import { AoSigner } from '@project-kardeshev/ao-sdk';
+import { AoSigner } from '@project-kardeshev/ao-sdk/web';
 import { connect, disconnect, getAccount } from '@wagmi/core';
 import { DataItem, DispatchResult, PermissionType } from 'arconnect';
 import { SignatureOptions } from 'arweave/node/lib/crypto/crypto-interface';
