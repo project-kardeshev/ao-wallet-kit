@@ -7,6 +7,7 @@ import { ArweaveWebWalletStrategy } from './strategies/ArweaveWebWallet';
 import { BrowserWalletStrategy } from './strategies/BrowserWallet';
 import { ethereumStrategy, weaveVmStrategy } from './strategies/Ethereum';
 import { OthentStrategy } from './strategies/Othent';
+import { WagmiStrategy, WagmiStrategyOptions } from './strategies/Wagmi';
 
 export const STRATEGY_STORE = 'wallet_kit_strategy_id';
 
@@ -63,6 +64,17 @@ export function saveStrategy(active: string) {
 export function getStrategy(id: string | false, strategies: Strategy[]) {
   return strategies.find((s) => s.id === id);
 }
+
+export {
+  ethereumStrategy,
+  weaveVmStrategy,
+  ArConnectStrategy,
+  ArweaveWebWalletStrategy,
+  BrowserWalletStrategy,
+  OthentStrategy,
+  WagmiStrategy,
+  WagmiStrategyOptions,
+};
 
 export default [
   new ArConnectStrategy(),
