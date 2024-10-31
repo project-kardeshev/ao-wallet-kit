@@ -1,25 +1,22 @@
 ## [1.0.2-alpha.4](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.2-alpha.3...v1.0.2-alpha.4) (2024-10-29)
 
-
 ### Bug Fixes
 
-* **imports:** fix broken bullshit ([998255d](https://github.com/project-kardeshev/ao-wallet-kit/commit/998255d3060626c9a0de948b96f918dad27cdcc1))
+- **imports:** fix broken bullshit ([998255d](https://github.com/project-kardeshev/ao-wallet-kit/commit/998255d3060626c9a0de948b96f918dad27cdcc1))
 
 ## [1.0.2-alpha.3](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.2-alpha.2...v1.0.2-alpha.3) (2024-10-29)
 
-
 ### Bug Fixes
 
-* **lock:** update lock file ([9eacea4](https://github.com/project-kardeshev/ao-wallet-kit/commit/9eacea4e763be5da50901a93f261118bffdecd1a))
-* **pin sdk:** pin ao-sdk ([a145e82](https://github.com/project-kardeshev/ao-wallet-kit/commit/a145e8209f3db40ff73923869208d9d4d4e4bb81))
+- **lock:** update lock file ([9eacea4](https://github.com/project-kardeshev/ao-wallet-kit/commit/9eacea4e763be5da50901a93f261118bffdecd1a))
+- **pin sdk:** pin ao-sdk ([a145e82](https://github.com/project-kardeshev/ao-wallet-kit/commit/a145e8209f3db40ff73923869208d9d4d4e4bb81))
 
 ## [1.0.2-alpha.2](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.2-alpha.1...v1.0.2-alpha.2) (2024-10-28)
 
-
 ### Bug Fixes
 
-* **ao-sdk:** bump ao-sdk ([f6df62f](https://github.com/project-kardeshev/ao-wallet-kit/commit/f6df62fd32e58223145665230d731c745f060349))
-* **lint:** array deps ([2660306](https://github.com/project-kardeshev/ao-wallet-kit/commit/26603066d9c12c1a59147b8a88448564a4f7db8c))
+- **ao-sdk:** bump ao-sdk ([f6df62f](https://github.com/project-kardeshev/ao-wallet-kit/commit/f6df62fd32e58223145665230d731c745f060349))
+- **lint:** array deps ([2660306](https://github.com/project-kardeshev/ao-wallet-kit/commit/26603066d9c12c1a59147b8a88448564a4f7db8c))
 
 ## [1.0.2-alpha.1](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.1...v1.0.2-alpha.1) (2024-10-26)
 
