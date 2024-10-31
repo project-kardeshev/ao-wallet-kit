@@ -1,3 +1,10 @@
+## [1.0.2-alpha.6](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.2-alpha.5...v1.0.2-alpha.6) (2024-10-31)
+
+
+### Bug Fixes
+
+* **decryption:** add decryption for eth and ar wallet ([d23610b](https://github.com/project-kardeshev/ao-wallet-kit/commit/d23610ba081424b810152dfdc8685882982f01a2))
+
 ## [1.0.2-alpha.5](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.2-alpha.4...v1.0.2-alpha.5) (2024-10-31)
 
 
