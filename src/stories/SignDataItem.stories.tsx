@@ -7,50 +7,49 @@ import { useActiveStrategy, useApi } from '../hooks';
 import { WagmiStrategy } from '../strategy/strategies/Wagmi';
 import { createWagmiDataItemSigner } from '../utils';
 
+function Sign() {
+  const api = useApi();
+  const strategy = useActiveStrategy();
+  const [txId, setTxId] = useState<string>('');
+
+  async function sign() {
+    console.log(strategy, api);
+    if (strategy instanceof WagmiStrategy) {
+      const signer = await createWagmiDataItemSigner(strategy.config);
+
+      const partialData = {
+        data: 'blah',
+        tags: [{ name: 'test', value: 'test' }],
+        target: ''.padEnd(43, '1'),
+      };
+      const { id } = await signer(partialData);
+      console.log('Signed:', id);
+      setTxId(id);
+    }
+  }
+  return (
+    <button
+      onClick={sign}
+      style={{
+        backgroundColor: 'rgb(0, 122, 255)',
+        color: 'white',
+        padding: '0.5rem 1rem',
+        borderRadius: '0.5rem',
+        border: 'none',
+        cursor: 'pointer',
+        marginTop: '1rem',
+      }}
+    >
+      Sign Data {txId}
+    </button>
+  );
+}
 export default {
-  name: 'ConnectButton',
-  component: ConnectButton,
+  name: 'Sign Data Item',
+  component: Sign,
 };
 
 const Template: ComponentStory<typeof AOWalletKit> = (props) => {
-  function Sign() {
-    const api = useApi();
-    const strategy = useActiveStrategy();
-    const [txId, setTxId] = useState<string>('');
-
-    async function sign() {
-      console.log(strategy, api);
-      if (strategy instanceof WagmiStrategy) {
-        const signer = await createWagmiDataItemSigner(strategy.config);
-
-        const partialData = {
-          data: 'blah',
-          tags: [{ name: 'test', value: 'test' }],
-          target: ''.padEnd(43, '1'),
-        };
-        const { id } = await signer(partialData);
-        console.log('Signed:', id);
-        setTxId(id);
-      }
-    }
-    return (
-      <button
-        onClick={sign}
-        style={{
-          backgroundColor: 'rgb(0, 122, 255)',
-          color: 'white',
-          padding: '0.5rem 1rem',
-          borderRadius: '0.5rem',
-          border: 'none',
-          cursor: 'pointer',
-          marginTop: '1rem',
-        }}
-      >
-        Sign Data {txId}
-      </button>
-    );
-  }
-
   return (
     <div
       style={{

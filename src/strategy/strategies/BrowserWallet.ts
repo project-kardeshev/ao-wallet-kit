@@ -112,14 +112,18 @@ export class BrowserWalletStrategy implements Strategy {
 
   public async encrypt(
     data: BufferSource,
-    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
+    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams = {
+      name: 'RSA-OAEP',
+    },
   ): Promise<Uint8Array> {
     return await callWindowApi('encrypt', [data, algorithm]);
   }
 
   public async decrypt(
     data: BufferSource,
-    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
+    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams = {
+      name: 'RSA-OAEP',
+    },
   ): Promise<Uint8Array> {
     return await callWindowApi('decrypt', [data, algorithm]);
   }

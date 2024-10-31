@@ -1,3 +1,4 @@
+import { encrypt } from '@metamask/eth-sig-util';
 import { AoSigner } from '@project-kardeshev/ao-sdk/web';
 import { connect, disconnect, getAccount } from '@wagmi/core';
 import { DataItem, DispatchResult, PermissionType } from 'arconnect';
@@ -194,24 +195,34 @@ export class WagmiStrategy implements Strategy {
   ) {
     listener(new CustomEvent(this.account ?? ''));
   }
+
+  public async encrypt(data: BufferSource): Promise<Uint8Array> {
+    const signer = await getEthersSigner(this.config);
+    const publicKey = await signer.provider.send('eth_getEncryptionPublicKey', [
+      this.account,
+    ]);
+    const stringData = new TextDecoder().decode(data);
+    const encryptedData = encrypt({
+      data: stringData,
+      publicKey: publicKey,
+      version: 'x25519-xsalsa20-poly1305',
+    });
+    return new TextEncoder().encode(JSON.stringify(encryptedData));
+  }
+  public async decrypt(data: BufferSource): Promise<Uint8Array> {
+    const signer = await getEthersSigner(this.config);
+    const address = await this.getActiveAddress();
+    // doing all this bullshit to avoid use of buffer
+    const encoder = new TextEncoder();
+    const decoder = new TextDecoder();
+    const hexData = `0x${Array.from(encoder.encode(decoder.decode(data)))
+      .map((byte) => byte.toString(16).padStart(2, '0'))
+      .join('')}`;
+    return signer.provider.send('eth_decrypt', [hexData, address]);
+  }
+
   // unused apis, no need to lint - remove when used
   /* eslint-disable */
-  public async encrypt(
-    data: BufferSource,
-    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
-  ): Promise<Uint8Array> {
-    throw new Error(
-      'Method not yet available on ethereum wallets. (coming soon)',
-    );
-  }
-  public async decrypt(
-    data: BufferSource,
-    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
-  ): Promise<Uint8Array> {
-    throw new Error(
-      'Method not yet available on ethereum wallets. (coming soon)',
-    );
-  }
   public async getPermissions(): Promise<PermissionType[]> {
     return [
       'ACCESS_ADDRESS',

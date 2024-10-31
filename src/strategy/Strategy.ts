@@ -39,13 +39,20 @@ export abstract class Strategy {
   ): Promise<Transaction>;
   public abstract getPermissions(): Promise<PermissionType[]>;
   public abstract getWalletNames?(): Promise<{ [addr: string]: string }>;
+  /**
+   * @description Encrypts data using the active wallet's public key. Important: this method is not available in all strategies, and for arweave wallets the data should be converted to a b64url string after encryption
+   * - and then back from a b64url string to a Uint8Array before decryption. Decoding to UTF-8 string will break the data, but b64url encoding/decoding will not.
+   * @param data - data to encrypt, Uint8Array
+   * @param algorithm - optional, defaults to RsaOaepParams
+   *
+   */
   public abstract encrypt?(
     data: BufferSource,
-    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
+    algorithm?: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
   ): Promise<Uint8Array>;
   public abstract decrypt?(
     data: BufferSource,
-    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
+    algorithm?: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
   ): Promise<Uint8Array>;
   public abstract getArweaveConfig?(): Promise<GatewayConfig>;
   public abstract signature?(
