@@ -67,6 +67,7 @@
     "@linaria/babel-preset": "^4.4.5",
     "@linaria/core": "^4.2.10",
     "@linaria/react": "^4.3.8",
+    "@metamask/eth-sig-util": "^8.0.0",
     "@metamask/providers": "^18.1.0",
     "@othent/kms": "2.1.1",
     "@project-kardeshev/ao-sdk": "1.0.0-alpha.3",
