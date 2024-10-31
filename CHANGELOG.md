@@ -1,3 +1,11 @@
+## [1.0.2-alpha.5](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.2-alpha.4...v1.0.2-alpha.5) (2024-10-31)
+
+
+### Bug Fixes
+
+* **exports:** fix strategy exports ([43b4e23](https://github.com/project-kardeshev/ao-wallet-kit/commit/43b4e23233dbba26363cce5007f514a9b9b270ba))
+* **exports:** update wagmi exports ([9d51ba7](https://github.com/project-kardeshev/ao-wallet-kit/commit/9d51ba76e22e8d5ce5f3bab814b7da122a1fe2c7))
+
 ## [1.0.2-alpha.4](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.2-alpha.3...v1.0.2-alpha.4) (2024-10-29)
 
 ### Bug Fixes
