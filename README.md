@@ -8,7 +8,7 @@ AO.
 - [Supported wallets](#supported-wallets)
 - [Installation](#installation)
 - [Setup](#setup)
-- [Terminology of Arweave Wallet Kit](#terminology-of-arweave-wallet-kit)
+- [Terminology of AO Wallet Kit](#terminology-of-ao-wallet-kit)
   - [Strategies](#strategies)
 - [Config](#config)
   - [App config](#app-config)
@@ -87,7 +87,7 @@ const App = () => {
 };
 ```
 
-## Terminology of Arweave Wallet Kit
+## Terminology of AO Wallet Kit
 
 ### Strategies
 
@@ -98,8 +98,8 @@ communicate with all wallets the same way and with the same API. See
 
 ## Config
 
-The Arweave Wallet Kit can be configured with information about your application
-and with a custom theme.
+The AO Wallet Kit can be configured with information about your application and
+with a custom theme.
 
 ```tsx
 ...
@@ -205,8 +205,8 @@ export const ethereumStrategy = new WagmiStrategy({
 
 ### Custom theme
 
-With the `theme` field, you can define a custom theme configuration for the
-Arweave Wallet Kit modals and buttons.
+With the `theme` field, you can define a custom theme configuration for the AO
+Wallet Kit modals and buttons.
 
 #### Available options
 
@@ -243,7 +243,7 @@ Here's an example of how to use it:
 
 ## Connect Button
 
-To quickly integrate the Arweave Wallet Kit, you can use the `<ConnectButton>`
+To quickly integrate the AO Wallet Kit, you can use the `<ConnectButton>`
 component. It is a highly customizable button that supports displaying profile
 information about the connected wallet.
 
@@ -274,13 +274,13 @@ You can configure the Connect Button through it's props.
 ## Hooks
 
 Inside the [`<AOWalletKit>`](#setup), you can use all kinds of hooks that are
-reactive to the different [strategies](#terminology-of-arweave-wallet-kit). Some
-of the hooks / api functions might not be supported by all wallets.
+reactive to the different [strategies](#terminology-of-ao-wallet-kit). Some of
+the hooks / api functions might not be supported by all wallets.
 
 ### `useConnection`
 
 The core hook for connecting / disconnecting a
-[strategy](#terminology-of-arweave-wallet-kit).
+[strategy](#terminology-of-ao-wallet-kit).
 
 #### Usage
 
@@ -305,9 +305,8 @@ API hook. Returns the active strategy's API as an interactable object. Can be
 used to sign/encrypt, etc.
 
 **Some API functions might not be supported depending on the
-[strategy](#terminology-of-arweave-wallet-kit) the user chose. For example,
-Othent does not support the `signature()` function.** Make sure to verify
-beforehand.
+[strategy](#terminology-of-ao-wallet-kit) the user chose. For example, Othent
+does not support the `signature()` function.** Make sure to verify beforehand.
 
 #### Usage
 
@@ -361,8 +360,8 @@ const publicKey = usePublicKey();
 
 ### `usePermissions`
 
-Permissions hook. Returns the permissions given to the app, known by Arweave
-Wallet Kit.
+Permissions hook. Returns the permissions given to the app, known by AO Wallet
+Kit.
 
 #### Usage
 
@@ -374,8 +373,8 @@ const permissions = usePermissions();
 
 ### `useAddresses`
 
-All addresses hook. Returns the addresses in the connected wallet, known by
-Arweave Wallet Kit. Requires the `ACCESS_ALL_ADDRESSES` permission.
+All addresses hook. Returns the addresses in the connected wallet, known by AO
+Wallet Kit. Requires the `ACCESS_ALL_ADDRESSES` permission.
 
 #### Usage
 
@@ -387,9 +386,9 @@ const addresses = useAddresses();
 
 ### `useWalletNames`
 
-All addresses hook. Returns the addresses in the connected wallet, known by
-Arweave Wallet Kit. Requires the `ACCESS_ALL_ADDRESSES` permission. Note this is
-note available for Ethereum wallets.
+All addresses hook. Returns the addresses in the connected wallet, known by AO
+Wallet Kit. Requires the `ACCESS_ALL_ADDRESSES` permission. Note this is note
+available for Ethereum wallets.
 
 #### Usage
 
