@@ -1,4 +1,6 @@
-import { connect, disconnect, getAccount } from '@wagmi/core';
+import { encrypt } from '@metamask/eth-sig-util';
+import { AoSigner } from '@project-kardeshev/ao-sdk/web';
+import { connect, disconnect, getAccount, reconnect } from '@wagmi/core';
 import { DataItem, DispatchResult, PermissionType } from 'arconnect';
 import { SignatureOptions } from 'arweave/node/lib/crypto/crypto-interface';
 import Transaction from 'arweave/node/lib/transaction';
@@ -8,9 +10,10 @@ import { injected } from 'wagmi/connectors';
 
 import {
   createWagmiDataItemSigner,
+  getEthersPublicKeyFromClient,
   getEthersSigner,
 } from '../../utils/ethereum';
-import Strategy from '../Strategy';
+import { Strategy } from '../Strategy';
 
 export type WagmiStrategyOptions = {
   id: string;
@@ -21,13 +24,13 @@ export type WagmiStrategyOptions = {
   wagmiConfig: WagmiConfig;
 };
 
-export default class WagmiStrategy implements Strategy {
+export class WagmiStrategy implements Strategy {
   public id: string;
   public name: string;
   public description: string;
   public theme: string; // Customize as needed
   public logo: string; // arweave tx id of the logo
-  private config: WagmiConfig;
+  public config: WagmiConfig;
   public signer: ethers.Signer | null = null;
   public account: string | null = null;
   private unsubscribeAccount: null | (() => void) = null;
@@ -48,23 +51,32 @@ export default class WagmiStrategy implements Strategy {
     this.config = wagmiConfig;
 
     // Set up listeners for signer and account changes
+    this.sync();
     this.setupListeners();
   }
 
   private setupListeners() {
     // Subscribe to account changes
     this.unsubscribeAccount = this.config.subscribe(
-      (state) => state.current,
+      (state) => state,
       (current) => {
-        this.account = current ?? null;
+        console.log('Account state:', current);
+        let newAccount: null | `0x${string}` = null;
+        if (current.current) {
+          newAccount =
+            current.connections.get(current.current)?.accounts[0] ?? null;
+        }
+        this.account = newAccount;
         console.log('Account changed:', this.account);
 
         // Update signer when account changes
         if (this.account) {
-          getEthersSigner(this.config).then((signer) => {
-            this.signer = signer;
-            console.log('Signer updated:', this.signer);
-          });
+          getEthersSigner(this.config)
+            .then((signer) => {
+              this.signer = signer;
+              console.log('Signer updated:', this.signer);
+            })
+            .catch(console.error);
         } else {
           this.signer = null;
         }
@@ -90,6 +102,14 @@ export default class WagmiStrategy implements Strategy {
 
   public async sync(): Promise<void> {
     // Optional sync method depending on your strategy's needs
+    await reconnect(this.config, {
+      connectors: [injected({ target: 'metaMask' })],
+    });
+    if (this.account) {
+      this.signer = await getEthersSigner(this.config);
+    } else {
+      this.signer = null;
+    }
   }
 
   public async connect(): Promise<void> {
@@ -121,6 +141,10 @@ export default class WagmiStrategy implements Strategy {
     return this.account ?? '';
   }
 
+  public async getActivePublicKey(): Promise<string> {
+    return getEthersPublicKeyFromClient(this.config);
+  }
+
   public async getAllAddresses(): Promise<string[]> {
     const accounts = getAccount(this.config).addresses;
     return (accounts ?? []) as string[];
@@ -148,7 +172,7 @@ export default class WagmiStrategy implements Strategy {
       throw new Error('Signer not available');
     }
     const signDataItem = await createWagmiDataItemSigner(this.config);
-    return signDataItem(dataItem).then((res) => res.raw);
+    return signDataItem(dataItem).then((res) => res.raw) as any;
   }
   public addAddressEvent(listener: (address: string) => void) {
     // Subscribe to account changes
@@ -171,26 +195,47 @@ export default class WagmiStrategy implements Strategy {
   ) {
     listener(new CustomEvent(this.account ?? ''));
   }
+
+  public async encrypt(data: BufferSource): Promise<Uint8Array> {
+    const signer = await getEthersSigner(this.config);
+    const publicKey = await signer.provider.send('eth_getEncryptionPublicKey', [
+      this.account,
+    ]);
+    const stringData = new TextDecoder().decode(data);
+    const encryptedData = encrypt({
+      data: stringData,
+      publicKey: publicKey,
+      version: 'x25519-xsalsa20-poly1305',
+    });
+    return new TextEncoder().encode(JSON.stringify(encryptedData));
+  }
+  public async decrypt(data: BufferSource): Promise<Uint8Array> {
+    const signer = await getEthersSigner(this.config);
+    const address = await this.getActiveAddress();
+    // doing all this bullshit to avoid use of buffer
+    const encoder = new TextEncoder();
+    const decoder = new TextDecoder();
+    const hexData = `0x${Array.from(encoder.encode(decoder.decode(data)))
+      .map((byte) => byte.toString(16).padStart(2, '0'))
+      .join('')}`;
+    return signer.provider.send('eth_decrypt', [hexData, address]);
+  }
+
   // unused apis, no need to lint - remove when used
   /* eslint-disable */
-  public async encrypt(
-    data: BufferSource,
-    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
-  ): Promise<Uint8Array> {
-    throw new Error(
-      'Method not yet available on ethereum wallets. (coming soon)',
-    );
-  }
-  public async decrypt(
-    data: BufferSource,
-    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
-  ): Promise<Uint8Array> {
-    throw new Error(
-      'Method not yet available on ethereum wallets. (coming soon)',
-    );
-  }
   public async getPermissions(): Promise<PermissionType[]> {
-    return [] as PermissionType[];
+    return [
+      'ACCESS_ADDRESS',
+      'ACCESS_PUBLIC_KEY',
+      'ACCESS_ALL_ADDRESSES',
+      'SIGN_TRANSACTION',
+      'ENCRYPT',
+      'DECRYPT',
+      'SIGNATURE',
+      'ACCESS_ARWEAVE_CONFIG',
+      'DISPATCH',
+      'ACCESS_TOKENS',
+    ] as PermissionType[];
   }
   public async dispatch(transaction: Transaction): Promise<DispatchResult> {
     throw new Error('Method not available on ethereum wallets.');
@@ -208,5 +253,8 @@ export default class WagmiStrategy implements Strategy {
   }
   public async getWalletNames(): Promise<{ [addr: string]: string }> {
     throw new Error('Method not available on ethereum wallets.');
+  }
+  public async createDataItemSigner(): Promise<AoSigner> {
+    return createWagmiDataItemSigner(this.config);
   }
 }

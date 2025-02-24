@@ -1,8 +1,8 @@
-import type { PermissionType } from 'arconnect';
+import { PermissionType } from 'arconnect';
 import 'arconnect';
-import type { Tag } from 'arweave/web/lib/transaction';
+import { Tag } from 'arweave/web/lib/transaction';
 
-import type { RGBObject } from '../components/Provider';
+import { RGBObject } from '../components/Provider';
 
 /**
  * Compare two permission arrays

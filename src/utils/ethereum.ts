@@ -36,11 +36,13 @@ export const weaveVmWagmiConfig = createConfig({
 
 export function clientToSigner(client: Client<Transport, Chain, Account>) {
   const { account, chain, transport } = client;
-  const network = {
-    chainId: chain.id,
-    name: chain.name,
-    ensAddress: chain.contracts?.ensRegistry?.address,
-  };
+  const network = chain
+    ? {
+        chainId: chain.id,
+        name: chain.name,
+        ensAddress: chain.contracts?.ensRegistry?.address,
+      }
+    : undefined;
   const provider = new BrowserProvider(transport, network);
   const signer = new JsonRpcSigner(provider, account.address);
   return signer;
@@ -100,7 +102,7 @@ export function createBrowserEthereumDataItemSigner(
       target,
       anchor: Math.round(Date.now() / 1000)
         .toString()
-        .padStart(43, Math.floor(Math.random() * 10).toString()),
+        .padStart(32, Math.floor(Math.random() * 10).toString()),
     });
 
     const res = await dataItem.sign(ethSigner).then(async () => ({

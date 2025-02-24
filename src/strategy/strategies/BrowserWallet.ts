@@ -1,21 +1,22 @@
-import type {
+import { AoSigner, createAoSigner } from '@project-kardeshev/ao-sdk/web';
+import {
   AppInfo,
   DataItem,
   DispatchResult,
   GatewayConfig,
   PermissionType,
 } from 'arconnect';
-import type { SignatureOptions } from 'arweave/node/lib/crypto/crypto-interface';
-import type Transaction from 'arweave/node/lib/transaction';
+import { SignatureOptions } from 'arweave/node/lib/crypto/crypto-interface';
+import Transaction from 'arweave/node/lib/transaction';
 
 import { callWindowApi } from '../../utils/arweave';
-import type Strategy from '../Strategy';
+import { Strategy } from '../Strategy';
 
 /**
  * Any kind of browser wallet, with an
  * ArConnect-like injected API
  */
-export default class BrowserWalletStrategy implements Strategy {
+export class BrowserWalletStrategy implements Strategy {
   public id: 'browserwallet' = 'browserwallet';
   public name = 'Browser Wallet';
   public description = 'Any browser wallet with an injected API';
@@ -111,14 +112,18 @@ export default class BrowserWalletStrategy implements Strategy {
 
   public async encrypt(
     data: BufferSource,
-    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
+    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams = {
+      name: 'RSA-OAEP',
+    },
   ): Promise<Uint8Array> {
     return await callWindowApi('encrypt', [data, algorithm]);
   }
 
   public async decrypt(
     data: BufferSource,
-    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
+    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams = {
+      name: 'RSA-OAEP',
+    },
   ): Promise<Uint8Array> {
     return await callWindowApi('decrypt', [data, algorithm]);
   }
@@ -159,5 +164,9 @@ export default class BrowserWalletStrategy implements Strategy {
     listener: (e: CustomEvent<{ address: string }>) => void,
   ) {
     removeEventListener('walletSwitch', listener);
+  }
+
+  public async createDataItemSigner(): Promise<AoSigner> {
+    return createAoSigner(window.arweaveWallet as Window['arweaveWallet']);
   }
 }

@@ -1,18 +1,18 @@
 import { styled } from '@linaria/react';
-import type { Variants } from 'framer-motion';
+import { Variants } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 import { Button } from '../components/Button';
 import { Modal } from '../components/Modal/Modal';
-import type { Radius } from '../components/Provider';
-import useGlobalState from '../hooks/global';
-import useModal from '../hooks/modal';
+import { Radius } from '../components/Provider';
+import { useGlobalState } from '../hooks/global';
+import { useModal } from '../hooks/modal';
 import { STRATEGY_STORE, syncStrategies } from '../strategy';
 import strategies from '../strategy';
-import type Strategy from '../strategy/Strategy';
+import { Strategy } from '../strategy/Strategy';
 import { DefaultTheme, withTheme } from '../theme';
 
-export default function RestoreSession() {
+export function RestoreSession() {
   // modal controlls and statuses
   const modalController = useModal();
   const { state, dispatch } = useGlobalState();
@@ -141,7 +141,6 @@ const BottomModal = withTheme(styled(Modal as any)<any>`
   display: flex;
   align-items: center;
   gap: 1.24rem;
-  padding: 0.75rem 1rem;
   border-radius: ${(props) =>
     radius[props.theme.themeConfig.radius as Radius] + 'px'};
   border-radius: 15px;
@@ -160,6 +159,7 @@ const BottomModal = withTheme(styled(Modal as any)<any>`
 const Text = withTheme(styled.p<{ theme: DefaultTheme }>`
   font-size: 1.05rem;
   font-weight: 500;
+  padding: 10px 20px;
   color: rgb(${(props) => props.theme.primaryText});
   margin: 0px;
 `);
@@ -167,6 +167,7 @@ const Text = withTheme(styled.p<{ theme: DefaultTheme }>`
 const Buttons = styled.div`
   display: flex;
   align-items: center;
+  padding: 10px 20px;
   gap: 0.6rem;
 
   @media screen and (max-width: 720px) {

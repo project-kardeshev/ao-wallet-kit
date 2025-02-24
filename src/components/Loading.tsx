@@ -1,5 +1,5 @@
 import { styled } from '@linaria/react';
-import type { HTMLProps } from 'react';
+import { HTMLProps } from 'react';
 
 export const Loading = (props: HTMLProps<SVGElement>) => (
   <SvgWrapper

@@ -8,7 +8,7 @@ import { Modal } from '../components/Modal/Modal';
 import { Paragraph } from '../components/Paragraph';
 import { AOWalletKit } from '../components/Provider';
 import { Title, TitleWithParagraph } from '../components/Title';
-import useModal from '../hooks/modal';
+import { useModal } from '../hooks/modal';
 
 export default {
   name: 'Modal',

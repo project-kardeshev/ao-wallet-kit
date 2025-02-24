@@ -6,15 +6,14 @@ import { Button } from '../components/Button';
 import { Head } from '../components/Modal/Head';
 import { Modal } from '../components/Modal/Modal';
 import { Paragraph } from '../components/Paragraph';
-import type { Radius } from '../components/Provider';
+import { Radius } from '../components/Provider';
 import { Title } from '../components/Title';
-import useBalance from '../hooks/balance';
-import useConnection from '../hooks/connection';
-import useGatewayURL from '../hooks/gateway';
-import useGlobalState from '../hooks/global';
-import useModal from '../hooks/modal';
-import useActiveStrategy from '../hooks/strategy';
-import useAns from '../hooks/useAns';
+import { useBalance } from '../hooks/balance';
+import { useConnection } from '../hooks/connection';
+import { useGatewayURL } from '../hooks/gateway';
+import { useGlobalState } from '../hooks/global';
+import { useModal } from '../hooks/modal';
+import { useActiveStrategy } from '../hooks/strategy';
 import { DefaultTheme, withTheme } from '../theme';
 import { formatAddress } from '../utils/arweave';
 
@@ -25,7 +24,7 @@ export function ProfileModal() {
 
   useEffect(() => {
     modalController.setOpen(state?.activeModal === 'profile');
-  }, [state?.activeModal]);
+  }, [state?.activeModal, modalController]);
 
   useEffect(() => {
     if (modalController.open) return;
@@ -38,9 +37,6 @@ export function ProfileModal() {
 
   // load balance
   const balance = useBalance();
-
-  // load ans profile
-  const ans = useAns();
 
   // configured gateway
   const gateway = useGatewayURL();
@@ -57,8 +53,8 @@ export function ProfileModal() {
         <Title>Profile</Title>
       </Head>
       <ProfileData>
-        <ProfilePicture profilePicture={ans?.avatar}>
-          {!ans?.avatar && <ProfileIcon />}
+        <ProfilePicture>
+          <ProfileIcon />
           <ActiveStrategy strategyTheme={strategy?.theme}>
             <img
               src={strategy?.logo ? `${gateway}/${strategy.logo}` : ''}
@@ -68,7 +64,7 @@ export function ProfileModal() {
           </ActiveStrategy>
         </ProfilePicture>
         <Title>
-          {ans?.currentLabel || formatAddress(state?.activeAddress || '', 8)}
+          {formatAddress(state?.activeAddress || '', 8)}
           <CopyIcon
             onClick={() =>
               navigator.clipboard.writeText(state.activeAddress || '')

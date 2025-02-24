@@ -1,12 +1,12 @@
 import Arweave from 'arweave/node/common';
 import { useEffect, useState } from 'react';
 
-import useGlobalState from './global';
+import { useGlobalState } from './global';
 
 /**
  * Balance hook
  */
-export default function useBalance() {
+export function useBalance() {
   const [balance, setBalance] = useState(0);
   const { state } = useGlobalState();
 
@@ -28,7 +28,7 @@ export default function useBalance() {
 
       setBalance(Number(bal));
     })();
-  }, [state?.activeAddress]);
+  }, [state?.activeAddress, state?.config?.gatewayConfig]);
 
   return balance;
 }

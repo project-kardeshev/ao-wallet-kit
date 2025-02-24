@@ -1,12 +1,13 @@
-import type { PermissionType } from 'arconnect';
+import { PermissionType } from 'arconnect';
 
 import { comparePermissions } from '../utils/arweave';
-import Strategy from './Strategy';
-import ArConnectStrategy from './strategies/ArConnect';
-import ArweaveWebWalletStrategy from './strategies/ArweaveWebWallet';
-import BrowserWalletStrategy from './strategies/BrowserWallet';
+import { Strategy } from './Strategy';
+import { ArConnectStrategy } from './strategies/ArConnect';
+import { ArweaveWebWalletStrategy } from './strategies/ArweaveWebWallet';
+import { BrowserWalletStrategy } from './strategies/BrowserWallet';
 import { ethereumStrategy, weaveVmStrategy } from './strategies/Ethereum';
-import OthentStrategy from './strategies/Othent';
+import { OthentStrategy } from './strategies/Othent';
+import { WanderStrategy } from './strategies/WanderStrategy';
 
 export const STRATEGY_STORE = 'wallet_kit_strategy_id';
 
@@ -64,11 +65,23 @@ export function getStrategy(id: string | false, strategies: Strategy[]) {
   return strategies.find((s) => s.id === id);
 }
 
+export {
+  ethereumStrategy,
+  weaveVmStrategy,
+  ArConnectStrategy,
+  WanderStrategy,
+  ArweaveWebWalletStrategy,
+  BrowserWalletStrategy,
+  OthentStrategy,
+};
+
+export * from './strategies/Wagmi';
+
 export default [
-  new ArConnectStrategy(),
   new ArweaveWebWalletStrategy(),
   new OthentStrategy(),
   new BrowserWalletStrategy(),
+  new WanderStrategy(),
   ethereumStrategy,
   weaveVmStrategy,
 ];

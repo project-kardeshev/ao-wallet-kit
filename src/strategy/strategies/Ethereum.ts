@@ -1,5 +1,5 @@
 import { ethereumWagmiConfig, weaveVmWagmiConfig } from '../../utils/ethereum';
-import WagmiStrategy from './Wagmi';
+import { WagmiStrategy } from './Wagmi';
 
 export const ethereumStrategy = new WagmiStrategy({
   id: 'ethereum',

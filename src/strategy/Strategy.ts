@@ -1,14 +1,15 @@
-import type {
+import { AoSigner } from '@project-kardeshev/ao-sdk/web';
+import {
   AppInfo,
   DataItem,
   DispatchResult,
   GatewayConfig,
   PermissionType,
 } from 'arconnect';
-import type { SignatureOptions } from 'arweave/node/lib/crypto/crypto-interface';
-import type Transaction from 'arweave/node/lib/transaction';
+import { SignatureOptions } from 'arweave/node/lib/crypto/crypto-interface';
+import Transaction from 'arweave/node/lib/transaction';
 
-export default abstract class Strategy {
+export abstract class Strategy {
   // info
   public abstract id: string;
   public abstract name: string;
@@ -38,13 +39,20 @@ export default abstract class Strategy {
   ): Promise<Transaction>;
   public abstract getPermissions(): Promise<PermissionType[]>;
   public abstract getWalletNames?(): Promise<{ [addr: string]: string }>;
+  /**
+   * @description Encrypts data using the active wallet's public key. Important: this method is not available in all strategies, and for arweave wallets the data should be converted to a b64url string after encryption
+   * - and then back from a b64url string to a Uint8Array before decryption. Decoding to UTF-8 string will break the data, but b64url encoding/decoding will not.
+   * @param data - data to encrypt, Uint8Array
+   * @param algorithm - optional, defaults to RsaOaepParams
+   *
+   */
   public abstract encrypt?(
     data: BufferSource,
-    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
+    algorithm?: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
   ): Promise<Uint8Array>;
   public abstract decrypt?(
     data: BufferSource,
-    algorithm: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
+    algorithm?: RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams,
   ): Promise<Uint8Array>;
   public abstract getArweaveConfig?(): Promise<GatewayConfig>;
   public abstract signature?(
@@ -66,4 +74,5 @@ export default abstract class Strategy {
     listener: (e: CustomEvent<{ address: string }>) => void,
   ): void;
   public abstract signDataItem(p: DataItem): Promise<ArrayBuffer>;
+  public abstract createDataItemSigner(): Promise<AoSigner>;
 }

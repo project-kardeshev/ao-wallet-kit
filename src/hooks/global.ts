@@ -1,8 +1,8 @@
 import { useContext, useMemo } from 'react';
 
-import context, { defaultState } from '../context';
+import { context, defaultState } from '../context';
 
-export default function useGlobalState() {
+export function useGlobalState() {
   const ctx = useContext(context);
 
   const state = useMemo(

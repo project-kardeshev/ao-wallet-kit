@@ -1,15 +1,10 @@
-import type {
-  AppInfo,
-  DataItem,
-  GatewayConfig,
-  PermissionType,
-} from 'arconnect';
+import { AppInfo, DataItem, GatewayConfig, PermissionType } from 'arconnect';
 import { ArweaveWebWallet } from 'arweave-wallet-connector';
 
-import type Strategy from '../Strategy';
-import BrowserWalletStrategy from './BrowserWallet';
+import { Strategy } from '../Strategy';
+import { BrowserWalletStrategy } from './BrowserWallet';
 
-export default class ArweaveWebWalletStrategy
+export class ArweaveWebWalletStrategy
   extends BrowserWalletStrategy
   implements Strategy
 {

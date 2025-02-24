@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import { getStrategy } from '../strategy';
-import useGlobalState from './global';
+import { useGlobalState } from './global';
 
 export function useStrategies() {
   // global context
@@ -23,7 +23,7 @@ export function useStrategy() {
 }
 
 // active strategy instance
-export default function useActiveStrategy() {
+export function useActiveStrategy() {
   // global context
   const activeStrategy = useStrategy();
   const allStrategies = useStrategies();

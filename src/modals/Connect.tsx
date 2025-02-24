@@ -9,14 +9,14 @@ import { Footer } from '../components/Modal/Footer';
 import { Head } from '../components/Modal/Head';
 import { Modal } from '../components/Modal/Modal';
 import { Paragraph } from '../components/Paragraph';
-import type { Radius } from '../components/Provider';
+import { Radius } from '../components/Provider';
 import { Title, TitleWithParagraph } from '../components/Title';
-import useConnection from '../hooks/connection';
-import useGatewayURL from '../hooks/gateway';
-import useGlobalState from '../hooks/global';
-import useModal from '../hooks/modal';
+import { useConnection } from '../hooks/connection';
+import { useGatewayURL } from '../hooks/gateway';
+import { useGlobalState } from '../hooks/global';
+import { useModal } from '../hooks/modal';
 import { getStrategy, saveStrategy } from '../strategy';
-import type Strategy from '../strategy/Strategy';
+import { Strategy } from '../strategy/Strategy';
 import { DefaultTheme, withTheme } from '../theme';
 
 export function ConnectModal() {
@@ -27,13 +27,13 @@ export function ConnectModal() {
 
   useEffect(() => {
     modalController.setOpen(state?.activeModal === 'connect');
-  }, [state?.activeModal]);
+  }, [state?.activeModal, modalController]);
 
   useEffect(() => {
     if (modalController.open) return;
     setSelectedStrategy(undefined);
     dispatch({ type: 'CLOSE_MODAL' });
-  }, [modalController.open]);
+  }, [modalController.open, dispatch]);
 
   // connection
   const { connected } = useConnection();
@@ -42,7 +42,7 @@ export function ConnectModal() {
   useEffect(() => {
     if (!connected || state?.activeModal !== 'connect') return;
     dispatch({ type: 'CLOSE_MODAL' });
-  }, [connected, state]);
+  }, [connected, state, dispatch]);
 
   // selected strategy
   const [selectedStrategy, setSelectedStrategy] = useState<string>();
@@ -105,7 +105,6 @@ export function ConnectModal() {
         state.config.appInfo,
         state.config.gatewayConfig,
       );
-
       // send success message
       postMessage({
         type: 'connect_result',
@@ -121,13 +120,14 @@ export function ConnectModal() {
         type: 'UPDATE_STRATEGY',
         payload: s.id,
       });
-    } catch {
+    } catch (e) {
       fixupArConnectModal();
       setRetry(true);
       dispatch({
         type: 'UPDATE_STRATEGY',
         payload: false,
       });
+      console.error(e);
     }
 
     setConnecting(false);

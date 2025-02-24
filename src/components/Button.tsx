@@ -1,7 +1,7 @@
 import { styled } from '@linaria/react';
 
 import { DefaultTheme, withTheme } from '../theme';
-import type { Radius } from './Provider';
+import { Radius } from './Provider';
 
 const radius: Record<Radius, number> = {
   default: 30,

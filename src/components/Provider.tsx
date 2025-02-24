@@ -4,16 +4,16 @@ import { Helmet } from 'react-helmet';
 import { WagmiProvider, createConfig, http } from 'wagmi';
 import { mainnet } from 'wagmi/chains';
 
-import Context, { defaultState } from '../context';
-import type { Config } from '../context/faces';
-import globalReducer from '../context/reducer';
+import { context as Context, defaultState } from '../context';
+import { Config } from '../context/faces';
+import { reducer as globalReducer } from '../context/reducer';
 import { useSyncAddress } from '../hooks/active_address';
 import { useSyncPermissions } from '../hooks/permissions';
 import { ConnectModal } from '../modals/Connect';
 import { ProfileModal } from '../modals/Profile';
-import RestoreSession from '../modals/RestoreSession';
+import { RestoreSession } from '../modals/RestoreSession';
 import StrategyPresets from '../strategy';
-import Strategy from '../strategy/Strategy';
+import { Strategy } from '../strategy/Strategy';
 import { Font, ThemeProvider, darkTheme, lightTheme } from '../theme';
 import { rgbToString } from '../utils/arweave';
 

@@ -1,16 +1,16 @@
-import type { PermissionType } from 'arconnect';
+import { PermissionType } from 'arconnect';
 import { useEffect, useRef } from 'react';
 
 import { STRATEGY_STORE } from '../strategy';
 import { comparePermissions } from '../utils/arweave';
-import type { ConnectMsg } from './connection/connect';
-import useGlobalState from './global';
-import useActiveStrategy from './strategy';
+import { ConnectMsg } from './connection/connect';
+import { useGlobalState } from './global';
+import { useActiveStrategy } from './strategy';
 
 /**
  * Given permissions hook
  */
-export default function usePermissions(): PermissionType[] {
+export function usePermissions(): PermissionType[] {
   const { state, dispatch } = useGlobalState();
   const strategy = useActiveStrategy();
 
@@ -34,7 +34,7 @@ export default function usePermissions(): PermissionType[] {
         payload: await strategy.getPermissions(),
       });
     })();
-  }, [dispatch]);
+  }, [dispatch, strategy]);
 
   return state.givenPermissions;
 }
@@ -136,7 +136,7 @@ export function useSyncPermissions() {
     // there is an active strategy
     let addressChangeSync: any;
 
-    if (strategy) {
+    if (strategy && strategy.addAddressEvent) {
       addressChangeSync = strategy.addAddressEvent(sync);
     }
 
@@ -148,9 +148,18 @@ export function useSyncPermissions() {
 
       // remove sync on address change
       // if there was a listener added
-      if (strategy && addressChangeSync) {
+      if (strategy && addressChangeSync && strategy.removeAddressEvent) {
         strategy.removeAddressEvent(addressChangeSync);
       }
     };
-  }, [strategy, requiredPermissions, dispatch]);
+  }, [
+    strategy,
+    dispatch,
+    ensurePermissions,
+    requiredPermissions,
+    state.activeAddress,
+    state.activeStrategy,
+    state.config.appInfo,
+    state.config.gatewayConfig,
+  ]);
 }
