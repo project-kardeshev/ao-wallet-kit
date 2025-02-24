@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 
 import { useGlobalState } from './global';
 
+// TODO: implement tanstack query and AO token balance fetching
+
 /**
  * Balance hook
  */

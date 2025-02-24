@@ -11,6 +11,37 @@ import { formatAddress } from '../utils/arweave';
 import { Button } from './Button';
 import { Radius } from './Provider';
 
+/**
+ * @description This is a ConnectButton component that is used to connect to the Arweave/AO network.
+ * @param {Object} props - The props for the ConnectButton component.
+ * @param {boolean} props.accent - The accent color for the button.
+ * @param {boolean} props.showBalance - Whether to show the balance.
+ * @param {boolean} props.showProfilePicture - Whether to show the profile picture.
+ * @param {Function} props.onClick - The function to be called when the button is clicked.
+ * @param {boolean} props.profileModal - Whether to show the profile modal.
+ * @returns {JSX.Element} - The ConnectButton component.
+ * @example
+ * ```tsx
+ * import { ConnectButton, AOWalletKit } from '@project-kardeshev/ao-wallet-kit';
+ * const App = () => {
+ *   return (
+ *     <ConnectButton
+ *       accent={true}
+ *       showBalance={true}
+ *       showProfilePicture={true}
+ *       onClick={() => console.log('Button clicked')}
+ *       profileModal={true}
+ *     />
+ *   );
+ * };
+ *
+ * return (
+ *   <AOWalletKit>
+ *     <App />
+ *   </AOWalletKit>
+ *  );
+ *  ```
+ */
 export function ConnectButton({
   accent,
   showBalance = true,
