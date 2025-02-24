@@ -1,33 +1,30 @@
 ## [1.0.3-alpha.1](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.2...v1.0.3-alpha.1) (2025-02-16)
 
-
 ### Bug Fixes
 
-* **ao-sdk:** bump ao-sdk ([f6df62f](https://github.com/project-kardeshev/ao-wallet-kit/commit/f6df62fd32e58223145665230d731c745f060349))
-* **build:** update exports in build ([0999b52](https://github.com/project-kardeshev/ao-wallet-kit/commit/0999b52f964ca95324caf34e22518b4bbfac062d))
-* **build:** update exports in build ([1a42fd0](https://github.com/project-kardeshev/ao-wallet-kit/commit/1a42fd08b8347e1328bc87d02065f52a7ed27584))
-* **decryption:** add decryption for eth and ar wallet ([d23610b](https://github.com/project-kardeshev/ao-wallet-kit/commit/d23610ba081424b810152dfdc8685882982f01a2))
-* **exports:** fix strategy exports ([43b4e23](https://github.com/project-kardeshev/ao-wallet-kit/commit/43b4e23233dbba26363cce5007f514a9b9b270ba))
-* **exports:** update wagmi exports ([9d51ba7](https://github.com/project-kardeshev/ao-wallet-kit/commit/9d51ba76e22e8d5ce5f3bab814b7da122a1fe2c7))
-* **imports:** fix broken bullshit ([998255d](https://github.com/project-kardeshev/ao-wallet-kit/commit/998255d3060626c9a0de948b96f918dad27cdcc1))
-* **lint:** array deps ([2660306](https://github.com/project-kardeshev/ao-wallet-kit/commit/26603066d9c12c1a59147b8a88448564a4f7db8c))
-* **lock:** update lock file ([9eacea4](https://github.com/project-kardeshev/ao-wallet-kit/commit/9eacea4e763be5da50901a93f261118bffdecd1a))
-* **pin sdk:** pin ao-sdk ([a145e82](https://github.com/project-kardeshev/ao-wallet-kit/commit/a145e8209f3db40ff73923869208d9d4d4e4bb81))
+- **ao-sdk:** bump ao-sdk ([f6df62f](https://github.com/project-kardeshev/ao-wallet-kit/commit/f6df62fd32e58223145665230d731c745f060349))
+- **build:** update exports in build ([0999b52](https://github.com/project-kardeshev/ao-wallet-kit/commit/0999b52f964ca95324caf34e22518b4bbfac062d))
+- **build:** update exports in build ([1a42fd0](https://github.com/project-kardeshev/ao-wallet-kit/commit/1a42fd08b8347e1328bc87d02065f52a7ed27584))
+- **decryption:** add decryption for eth and ar wallet ([d23610b](https://github.com/project-kardeshev/ao-wallet-kit/commit/d23610ba081424b810152dfdc8685882982f01a2))
+- **exports:** fix strategy exports ([43b4e23](https://github.com/project-kardeshev/ao-wallet-kit/commit/43b4e23233dbba26363cce5007f514a9b9b270ba))
+- **exports:** update wagmi exports ([9d51ba7](https://github.com/project-kardeshev/ao-wallet-kit/commit/9d51ba76e22e8d5ce5f3bab814b7da122a1fe2c7))
+- **imports:** fix broken bullshit ([998255d](https://github.com/project-kardeshev/ao-wallet-kit/commit/998255d3060626c9a0de948b96f918dad27cdcc1))
+- **lint:** array deps ([2660306](https://github.com/project-kardeshev/ao-wallet-kit/commit/26603066d9c12c1a59147b8a88448564a4f7db8c))
+- **lock:** update lock file ([9eacea4](https://github.com/project-kardeshev/ao-wallet-kit/commit/9eacea4e763be5da50901a93f261118bffdecd1a))
+- **pin sdk:** pin ao-sdk ([a145e82](https://github.com/project-kardeshev/ao-wallet-kit/commit/a145e8209f3db40ff73923869208d9d4d4e4bb81))
 
 ## [1.0.2-alpha.6](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.2-alpha.5...v1.0.2-alpha.6) (2024-10-31)
 
-
 ### Bug Fixes
 
-* **decryption:** add decryption for eth and ar wallet ([d23610b](https://github.com/project-kardeshev/ao-wallet-kit/commit/d23610ba081424b810152dfdc8685882982f01a2))
+- **decryption:** add decryption for eth and ar wallet ([d23610b](https://github.com/project-kardeshev/ao-wallet-kit/commit/d23610ba081424b810152dfdc8685882982f01a2))
 
 ## [1.0.2-alpha.5](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.2-alpha.4...v1.0.2-alpha.5) (2024-10-31)
 
-
 ### Bug Fixes
 
-* **exports:** fix strategy exports ([43b4e23](https://github.com/project-kardeshev/ao-wallet-kit/commit/43b4e23233dbba26363cce5007f514a9b9b270ba))
-* **exports:** update wagmi exports ([9d51ba7](https://github.com/project-kardeshev/ao-wallet-kit/commit/9d51ba76e22e8d5ce5f3bab814b7da122a1fe2c7))
+- **exports:** fix strategy exports ([43b4e23](https://github.com/project-kardeshev/ao-wallet-kit/commit/43b4e23233dbba26363cce5007f514a9b9b270ba))
+- **exports:** update wagmi exports ([9d51ba7](https://github.com/project-kardeshev/ao-wallet-kit/commit/9d51ba76e22e8d5ce5f3bab814b7da122a1fe2c7))
 
 ## [1.0.2-alpha.4](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.2-alpha.3...v1.0.2-alpha.4) (2024-10-29)
 

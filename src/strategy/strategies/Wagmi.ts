@@ -1,6 +1,6 @@
 import { encrypt } from '@metamask/eth-sig-util';
 import { AoSigner } from '@project-kardeshev/ao-sdk/web';
-import { connect, disconnect, getAccount } from '@wagmi/core';
+import { connect, disconnect, getAccount, reconnect } from '@wagmi/core';
 import { DataItem, DispatchResult, PermissionType } from 'arconnect';
 import { SignatureOptions } from 'arweave/node/lib/crypto/crypto-interface';
 import Transaction from 'arweave/node/lib/transaction';
@@ -51,6 +51,7 @@ export class WagmiStrategy implements Strategy {
     this.config = wagmiConfig;
 
     // Set up listeners for signer and account changes
+    this.sync();
     this.setupListeners();
   }
 
@@ -101,6 +102,14 @@ export class WagmiStrategy implements Strategy {
 
   public async sync(): Promise<void> {
     // Optional sync method depending on your strategy's needs
+    await reconnect(this.config, {
+      connectors: [injected({ target: 'metaMask' })],
+    });
+    if (this.account) {
+      this.signer = await getEthersSigner(this.config);
+    } else {
+      this.signer = null;
+    }
   }
 
   public async connect(): Promise<void> {
@@ -114,15 +123,6 @@ export class WagmiStrategy implements Strategy {
       console.log('Connected to account:', account);
     } catch (error) {
       console.error(`[AO Wallet Kit] Error connecting to wallet:`, error);
-    }
-  }
-
-  public async resumeSession(): Promise<void> {
-    try {
-      await this.connect();
-      console.log('Resumed session.');
-    } catch (error) {
-      console.error(`[Ethereum Wallet Kit] Error resuming session:`, error);
     }
   }
 
@@ -172,7 +172,7 @@ export class WagmiStrategy implements Strategy {
       throw new Error('Signer not available');
     }
     const signDataItem = await createWagmiDataItemSigner(this.config);
-    return signDataItem(dataItem).then((res) => res.raw);
+    return signDataItem(dataItem).then((res) => res.raw) as any;
   }
   public addAddressEvent(listener: (address: string) => void) {
     // Subscribe to account changes
