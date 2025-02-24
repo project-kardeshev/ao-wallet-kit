@@ -1,2 +1,2 @@
 // AUTO GENERATED NO TOUCHY!
-export const version = '1.0.2-alpha.6';
+export const version = '1.0.3-alpha.1';
