@@ -1,3 +1,11 @@
+## [1.0.3-alpha.2](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.3-alpha.1...v1.0.3-alpha.2) (2025-02-24)
+
+
+### Bug Fixes
+
+* **strategies:** add wander strategy ([2dd4bc5](https://github.com/project-kardeshev/ao-wallet-kit/commit/2dd4bc5229aeee9c94b638916074d10d4703e189))
+* **wagmi:** fix wagmi reconnect and multichain signing ([b728292](https://github.com/project-kardeshev/ao-wallet-kit/commit/b72829251315bed3389fbb202a0522efb89376a6))
+
 ## [1.0.3-alpha.1](https://github.com/project-kardeshev/ao-wallet-kit/compare/v1.0.2...v1.0.3-alpha.1) (2025-02-16)
 
 ### Bug Fixes
